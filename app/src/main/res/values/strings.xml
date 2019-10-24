@@ -1,0 +1,48 @@
+<resources>
+	<string name="app_name">Employment</string>
+	<string name="navigation_drawer_open">Open navigation drawer</string>
+	<string name="navigation_drawer_close">Close navigation drawer</string>
+	<string name="nav_header_title">Android Studio</string>
+	<string name="nav_header_subtitle">android.studio@android.com</string>
+	<string name="nav_header_desc">Navigation header</string>
+	<string name="action_settings">Settings</string>
+	
+	<string name="menu_home">Home</string>
+	<string name="menu_gallery">Gallery</string>
+	<string name="menu_slideshow">Slideshow</string>
+	<string name="menu_tools">Tools</string>
+	<string name="menu_share">Share</string>
+	<string name="menu_send">Send</string>
+
+	<string name="txt_login">Log in</string>
+	<string name="txt_email">Email</string>
+	<string name="txt_pass">Password</string>
+	<string name="txt_pass_ret">Retype password</string>
+	<string name="txt_pass_frg">Forgot password?</string>
+	<string name="txt_dont">Don\'t have an account?\u0020</string>
+	<string name="txt_create_one">Create one!</string>
+	<string name="txt_register">Create account</string>
+	<string name="txt_recover_pass">Recover password</string>
+	<string name="txt_recovery_info">Please note, this recovery method works only for registered accounts. Please check out your email.</string>
+	<string name="add_warn_email_empty">Email cannot be empty</string>
+	<string name="add_warn_email_no_fit">Invalid email format, it must be like name@example.com</string>
+	<string name="txt_oops">Oops something\'s gone wrong! Please try again later.</string>
+	<string name="txt_reg_fail">Registration failed, please use another email</string>
+	<string name="txt_reg_fail_later">Registration failed, please try again later</string>
+	<string name="txt_login_fail_later">Authentification failed, please try again later</string>
+	<string name="txt_login_fail">Authentification failed, please make sure you inserted correct email and password</string>
+	<string name="txt_recovery_fail_later">Recovery failed, please try again later</string>
+	<string name="txt_recovery_fail">Recovery failed, please make sure you inserted correct email</string>
+	<string name="txt_recovery_ok">Recovery successfully, please checkout your email</string>
+	<string name="txt_congrat">Congratulation</string>
+	<string name="txt_congrat_det">Your account was successfully registered. You\'ll be redirected to home page</string>
+	<string name="txt_no_maps">Please make sure you have Google maps installed</string>
+	<string name="txt_oops_weathre">Oops something\'s gone wrong to get weather.</string>
+
+	<string name="share_subject_txt">Your trusted City interests manager</string>
+	<string name="share_message_body">Simple tool to enjoy city</string>
+
+	<string name="add_warn_pass_empty">Password must contain at least 5 characters</string>
+	<string name="add_warn_pass_retype">Passwords must be the same</string>
+
+</resources>
