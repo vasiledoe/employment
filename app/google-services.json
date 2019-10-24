@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "639960721270",
+    "firebase_url": "https://employment-8aa3c.firebaseio.com",
+    "project_id": "employment-8aa3c",
+    "storage_bucket": "employment-8aa3c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639960721270:android:6ec6ec383f929e3ed5fc57",
+        "android_client_info": {
+          "package_name": "com.bitplanet.employment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639960721270-1t0lan0e8ic5qs9icqt6mpbpg5cpdg9i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfJPta3rLiRixjxZpSSQ5yBnrB5yxQBAo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639960721270-1t0lan0e8ic5qs9icqt6mpbpg5cpdg9i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
