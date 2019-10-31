@@ -13,7 +13,8 @@
 	<string name="menu_tools">Tools</string>
 	<string name="menu_share">Share</string>
 	<string name="menu_send">Send</string>
-
+	<string name="txt_error">Error</string>
+	
 	<string name="txt_login">Log in</string>
 	<string name="txt_email">Email</string>
 	<string name="txt_pass">Password</string>
@@ -38,11 +39,11 @@
 	<string name="txt_congrat_det">Your account was successfully registered. You\'ll be redirected to home page</string>
 	<string name="txt_no_maps">Please make sure you have Google maps installed</string>
 	<string name="txt_oops_weathre">Oops something\'s gone wrong to get weather.</string>
-
+	
 	<string name="share_subject_txt">Your trusted City interests manager</string>
 	<string name="share_message_body">Simple tool to enjoy city</string>
-
-	<string name="add_warn_pass_empty">Password must contain at least 5 characters</string>
+	
+	<string name="add_warn_pass_empty">Password must contain at least 6 characters</string>
 	<string name="add_warn_pass_retype">Passwords must be the same</string>
 
 </resources>

@@ -6,4 +6,6 @@ import org.koin.experimental.builder.single
 val utilsModule = module {
 
     single<MyLogs>()
+    single<ResUtil>()
+
 }

@@ -5,15 +5,26 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import org.koin.android.ext.android.inject
+import utils.MyLogs
+import utils.ResUtil
 
 
 open class BaseActivity : AppCompatActivity() {
 
-    protected fun showSnack(coordinator: CoordinatorLayout, txt: String, isLongShow: Boolean) {
+    val logs: MyLogs by inject()
+    protected val resUtil: ResUtil by inject()
+
+
+    protected fun showSnack(
+            coordinator: CoordinatorLayout,
+            txt: String,
+            isLongShow: Boolean
+    ) {
         Snackbar.make(
-            coordinator,
-            txt,
-            if (isLongShow) Snackbar.LENGTH_SHORT else Snackbar.LENGTH_LONG
+                coordinator,
+                txt,
+                if (isLongShow) Snackbar.LENGTH_SHORT else Snackbar.LENGTH_LONG
         ).show()
     }
 
@@ -26,10 +37,10 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     protected fun switchFrgFromActivity(
-        fragment: Fragment,
-        isAddedToBackStack: Boolean,
-        idContainer: Int,
-        frgTag: String
+            fragment: Fragment,
+            isAddedToBackStack: Boolean,
+            idContainer: Int,
+            frgTag: String
     ) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(idContainer, fragment)

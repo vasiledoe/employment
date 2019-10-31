@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+	android:opacity="opaque">
+	
+	<item>
+		<color android:color="@color/white" />
+	</item>
+	
+	<item>
+		<bitmap
+			android:gravity="center"
+			android:scaleWidth="20%"
+			android:scaleHeight="20%"
+			android:src="@mipmap/ic_splash" />
+	</item>
+
+</layer-list>
