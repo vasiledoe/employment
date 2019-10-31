@@ -31,6 +31,20 @@ android {
         }
     }
 
+    flavorDimensions "whiteLabel"
+
+    productFlavors {
+        flavor_employer {
+            dimension "whiteLabel"
+            applicationIdSuffix = ".employer"
+        }
+
+        flavor_freelancer {
+            dimension "whiteLabel"
+            applicationIdSuffix = ".freelancer"
+        }
+    }
+
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8

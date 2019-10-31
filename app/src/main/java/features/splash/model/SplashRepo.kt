@@ -19,7 +19,7 @@ class SplashRepo : KoinComponent {
         val user = authInstance.currentUser
 
         if (user != null) {
-            logs.LOG("SplashRepo", "silentSignIn", "success")
+            logs.LOG("SplashRepo", "silentSignIn", "success: "+user.uid)
             listener.onSilentAuth(true)
 
         } else {

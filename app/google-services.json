@@ -8,9 +8,38 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:639960721270:android:6ec6ec383f929e3ed5fc57",
+        "mobilesdk_app_id": "1:639960721270:android:b51790be33b2a255d5fc57",
         "android_client_info": {
-          "package_name": "com.bitplanet.employment"
+          "package_name": "com.bitplanet.employment.employer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639960721270-1t0lan0e8ic5qs9icqt6mpbpg5cpdg9i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfJPta3rLiRixjxZpSSQ5yBnrB5yxQBAo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639960721270-1t0lan0e8ic5qs9icqt6mpbpg5cpdg9i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639960721270:android:496b3708450a0a73d5fc57",
+        "android_client_info": {
+          "package_name": "com.bitplanet.employment.freelancer"
         }
       },
       "oauth_client": [
