@@ -1,3 +1,6 @@
 <resources>
 	<string name="app_name">Eppo - hire talents</string>
+	<string name="menu_home">My posted jobs</string>
+	<string name="share_message_body">Simple tool to find best talents</string>
+
 </resources>
