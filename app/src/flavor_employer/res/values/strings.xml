@@ -1,6 +1,17 @@
 <resources>
-	<string name="app_name">Eppo - hire talents</string>
-	<string name="menu_home">My posted jobs</string>
-	<string name="share_message_body">Simple tool to find best talents</string>
+    <string name="app_name">Eppo - hire talents</string>
+    <string name="menu_home">My posted jobs</string>
+    <string name="share_message_body">Simple tool to find best talents</string>
+
+    <string name="txt_add">Add job</string>
+    <string name="txt_select_field">Select field</string>
+    <string name="txt_title">Title</string>
+    <string name="txt_descr">Full job description</string>
+    <string name="txt_adres">Address</string>
+    <string name="txt_remot">Remote</string>
+    <string name="txt_price">Price</string>
+    <string name="txt_currency">MDL</string>
+    <string name="txt_negociab">Negotiable</string>
+    <string name="txt_postjb">Post the job</string>
 
 </resources>
