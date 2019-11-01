@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
-import base.BaseFrg
+import base.view.BaseFrg
 import com.bitplanet.employment.R
 import features.auth.viewmodel.AuthViewModel
 import kotlinx.android.synthetic.main.frg_register.*
@@ -46,8 +46,6 @@ class RecoveryFrg : BaseFrg(), View.OnClickListener {
 
     private fun tryRecovery() {
         if (mViewModel.isRecoveryDataInserted(email = et_email.text.toString())) {
-
-            mViewModel.setLoading(true)
 
             mViewModel.doRecovery(
                     email = et_email.text.toString()

@@ -11,6 +11,7 @@ class SplashViewModel : ViewModel(), KoinComponent, OnSilentAuthListener {
 
     val isLogged = MutableLiveData<Boolean>()
 
+
     private val splashRepo: SplashRepo by inject()
 
 

@@ -13,11 +13,13 @@ import utils.ResUtil
 
 class AuthViewModel : ViewModel(), OnAuthListener, OnRecoveryPassListener, KoinComponent {
 
-    val error = MutableLiveData<String>()
     val isLogged = MutableLiveData<Boolean>()
     val isRecoverySent = MutableLiveData<Boolean>()
+
+    val error = MutableLiveData<String>()
     val isProgressLoading = MutableLiveData<Boolean>()
     val goToFrgId = MutableLiveData<Int>()
+
 
     private val authRepo: AuthRepo by inject()
     private val resUtil: ResUtil by inject()
@@ -84,6 +86,8 @@ class AuthViewModel : ViewModel(), OnAuthListener, OnRecoveryPassListener, KoinC
 
 
     fun doCreateAccount(email: String, pass: String) {
+        isProgressLoading.value = true
+
         authRepo.createAccount(
                 email = email,
                 password = pass,
@@ -92,6 +96,8 @@ class AuthViewModel : ViewModel(), OnAuthListener, OnRecoveryPassListener, KoinC
     }
 
     fun doLogin(email: String, pass: String) {
+        isProgressLoading.value = true
+
         authRepo.signIn(
                 email = email,
                 password = pass,
@@ -100,15 +106,12 @@ class AuthViewModel : ViewModel(), OnAuthListener, OnRecoveryPassListener, KoinC
     }
 
     fun doRecovery(email: String) {
+        isProgressLoading.value = true
+
         authRepo.recoveryPass(
                 email = email,
                 listener = this@AuthViewModel
         )
-    }
-
-
-    fun setLoading(isLoading: Boolean) {
-        isProgressLoading.value = isLoading
     }
 
     fun goToFrg(extraId: Int) {
@@ -124,7 +127,7 @@ class AuthViewModel : ViewModel(), OnAuthListener, OnRecoveryPassListener, KoinC
         isRecoverySent.value = true
     }
 
-    override fun onErrDb(err: String) {
+    override fun onErrDb(err: String?) {
         error.value = err
     }
 }

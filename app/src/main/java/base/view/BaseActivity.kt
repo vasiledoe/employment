@@ -1,4 +1,4 @@
-package base
+package base.view
 
 import android.content.Intent
 import android.net.Uri
@@ -6,6 +6,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import base.model.App
+import base.model.DefConstants
 import com.bitplanet.employment.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -15,6 +18,7 @@ import features.auth.view.RecoveryFrg
 import features.auth.view.RegisterFrg
 import features.create_job.view.CreateJobFrg
 import features.posted_jobs.view.JobsFrg
+import features.settings.view.SettingsFrg
 import org.koin.android.ext.android.inject
 import utils.MyLogs
 import utils.ResUtil
@@ -46,18 +50,63 @@ open class BaseActivity : AppCompatActivity() {
         viewLoading.visibility = View.GONE
     }
 
+//    protected fun switchFrgFromActivity(
+//            fragment: Fragment,
+//            isAddedToBackStack: Boolean,
+//            idContainer: Int,
+//            frgTag: String) {
+//        val fragmentTransaction = supportFragmentManager.beginTransaction()
+//        fragmentTransaction.replace(idContainer, fragment)
+//
+//        //add frg to system backstack
+//        if (isAddedToBackStack) {
+//            fragmentTransaction.addToBackStack(frgTag)
+//        }
+//
+//        fragmentTransaction.commitAllowingStateLoss()
+//    }
+
     protected fun switchFrgFromActivity(
             fragment: Fragment,
             isAddedToBackStack: Boolean,
             idContainer: Int,
-            frgTag: String
-    ) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(idContainer, fragment)
+            frgTag: String) {
+        logs.LOG("BaseActivity", "switchFrgFromActivity", "try go to: " + frgTag)
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+
+        fragmentTransaction.setCustomAnimations(
+                R.animator.fade_in,
+                R.animator.fade_out,
+                R.animator.fade_in,
+                R.animator.fade_out)
+
+        fragmentTransaction.replace(idContainer, fragment, frgTag)
+
+        //add frg tag name to custom backstack fragment list
+        App.fragmentBackStack.add(frgTag)
+
+        //check if need to change frg - to ignore multiple open same frg
+        if (App.fragmentBackStack.size > 1) {
+            val lastFrgTag = App.fragmentBackStack.get(App.fragmentBackStack.size - 2)
+
+            //exclude frg tag name from custom backstack fragment list and exit
+            if (frgTag == lastFrgTag) {
+                logs.LOG("BaseActivity", "switchFrgFromActivity", "WARNING --> can't add this rg to backstack - already is the last one")
+                App.fragmentBackStack.removeAt(App.fragmentBackStack.size - 1)
+
+                return
+            }
+        }
 
         //add frg to system backstack
+        logs.LOG("BaseActivity", "switchFrgFromActivity", "go to frg --> " + frgTag)
         if (isAddedToBackStack) {
             fragmentTransaction.addToBackStack(frgTag)
+
+        } else {
+            App.fragmentBackStack.clear()
+            fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
 
         fragmentTransaction.commitAllowingStateLoss()
@@ -137,7 +186,7 @@ open class BaseActivity : AppCompatActivity() {
 
             CREATE_JOB_FRG -> switchFrgFromActivity(
                     CreateJobFrg(),
-                    false,
+                    true,
                     R.id.container_for_fragments,
                     "CreateJobFrg"
             )
@@ -147,6 +196,13 @@ open class BaseActivity : AppCompatActivity() {
                     false,
                     R.id.container_for_fragments,
                     "JobsFrg"
+            )
+
+            SETTINGS_FRG -> switchFrgFromActivity(
+                    SettingsFrg(),
+                    false,
+                    R.id.container_for_fragments,
+                    "SettingsFrg"
             )
         }
     }
@@ -160,5 +216,6 @@ open class BaseActivity : AppCompatActivity() {
 
         val CREATE_JOB_FRG = 4
         val JOBS_FRG = 5
+        val SETTINGS_FRG = 6
     }
 }

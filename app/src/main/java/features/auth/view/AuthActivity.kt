@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import base.BaseActivity
-import base.CustomDialogs
+import base.view.BaseActivity
+import base.view.CustomDialogs
 import com.bitplanet.employment.MainActivity
 import com.bitplanet.employment.R
 import features.auth.viewmodel.AuthViewModel
@@ -47,16 +47,7 @@ class AuthActivity : BaseActivity() {
     private fun onBindModel() {
         mViewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
 
-        mViewModel.isProgressLoading.observe(this, Observer {
-            if (it) {
-                showLoading(progress_bar)
-
-            } else {
-                hideLoading(progress_bar)
-            }
-        })
-
-        mViewModel.isLogged.observe(this, Observer {
+               mViewModel.isLogged.observe(this, Observer {
             hideLoading(progress_bar)
             startActivity(Intent(this, MainActivity::class.java))
             finish()
@@ -67,6 +58,19 @@ class AuthActivity : BaseActivity() {
             if (it) onBackPressed()
         })
 
+        mViewModel.goToFrgId.observe(this, Observer {
+            openDesiredFrg(it)
+        })
+
+        mViewModel.isProgressLoading.observe(this, Observer {
+            if (it) {
+                showLoading(progress_bar)
+
+            } else {
+                hideLoading(progress_bar)
+            }
+        })
+
         mViewModel.error.observe(this, Observer {
             hideLoading(viewLoading = progress_bar)
 
@@ -75,10 +79,6 @@ class AuthActivity : BaseActivity() {
                     title = resUtil.getStringRes(R.string.txt_error),
                     msg = it
             )
-        })
-
-        mViewModel.goToFrgId.observe(this, Observer {
-            openDesiredFrg(it)
         })
     }
 

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
-import base.BaseFrg
+import base.view.BaseFrg
 import com.bitplanet.employment.R
 import features.auth.viewmodel.AuthViewModel
 import kotlinx.android.synthetic.main.frg_register.*
@@ -49,8 +49,6 @@ class RegisterFrg : BaseFrg(), View.OnClickListener {
                         email = et_email.text.toString(),
                         pass = et_pass.text.toString(),
                         passRepeat = et_pass_retype.text.toString())) {
-
-            mViewModel.setLoading(true)
 
             mViewModel.doCreateAccount(
                     email = et_email.text.toString(),

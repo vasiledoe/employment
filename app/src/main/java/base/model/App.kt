@@ -1,12 +1,16 @@
-package base
+package base.model
 
 import android.app.Application
+import base.baseModule
 import features.auth.authModule
+import features.create_job.createJobModule
+import features.posted_jobs.postedJobsModule
 import features.splash.splashModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import utils.utilsModule
+import java.util.*
 
 
 class App : Application() {
@@ -22,7 +26,14 @@ class App : Application() {
             androidContext(this@App)
 
             // modules
-            modules(authModule + splashModule + utilsModule)
+            modules(authModule + splashModule + utilsModule + createJobModule + baseModule + postedJobsModule)
         }
     }
+
+
+    companion object {
+        var fragmentBackStack = ArrayList<String>()
+
+    }
+
 }

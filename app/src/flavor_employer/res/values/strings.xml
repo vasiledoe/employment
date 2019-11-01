@@ -9,9 +9,16 @@
     <string name="txt_descr">Full job description</string>
     <string name="txt_adres">Address</string>
     <string name="txt_remot">Remote</string>
-    <string name="txt_price">Price</string>
-    <string name="txt_currency">MDL</string>
+    <string name="txt_price">Price in MDL</string>
     <string name="txt_negociab">Negotiable</string>
     <string name="txt_postjb">Post the job</string>
+    
+    <string name="txt_select_field_warn">Field is not selected</string>
+    <string name="txt_title_warn">Title cannot be empty</string>
+    <string name="txt_descr_warn">Description cannot be empty</string>
+    <string name="txt_adres_warn">Address cannot be empty</string>
+    <string name="txt_price_warn">Price cannot be empty</string>
+    <string name="txt_no_aplicants">No applicants yet</string>
+    <string name="txt_aplicants">tallents applied</string>
 
 </resources>

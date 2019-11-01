@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
-import base.BaseFrg
+import base.view.BaseActivity.Companion.RECOVERY
+import base.view.BaseActivity.Companion.REGISTER
+import base.view.BaseFrg
 import com.bitplanet.employment.R
 import features.auth.viewmodel.AuthViewModel
 import kotlinx.android.synthetic.main.frg_register.*
@@ -55,8 +57,6 @@ class LoginFrg : BaseFrg(), View.OnClickListener {
                         email = et_email.text.toString(),
                         pass = et_pass.text.toString())) {
 
-            mViewModel.setLoading(true)
-
             mViewModel.doLogin(
                     email = et_email.text.toString(),
                     pass = et_pass.text.toString()
@@ -72,11 +72,11 @@ class LoginFrg : BaseFrg(), View.OnClickListener {
             }
 
             R.id.tv_forgot_pass -> {
-                mViewModel.goToFrg(AuthActivity.RECOVERY)
+                mViewModel.goToFrg(RECOVERY)
             }
 
             R.id.tv_reg -> {
-                mViewModel.goToFrg(AuthActivity.REGISTER)
+                mViewModel.goToFrg(REGISTER)
             }
         }
     }

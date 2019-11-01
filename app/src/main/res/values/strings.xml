@@ -11,10 +11,11 @@
 	<string name="menu_communicate">Communicate</string>
 	<string name="menu_share">Share this app</string>
 	<string name="menu_send">Send us feedback</string>
-
+	
 	<string name="txt_error">Error</string>
 	<string name="txt_caution">Caution</string>
-
+	<string name="txt_unknown">unknown</string>
+	
 	<string name="txt_login">Log in</string>
 	<string name="txt_email">Email</string>
 	<string name="txt_pass">Password</string>
@@ -41,13 +42,17 @@
 	<string name="txt_oops_weathre">Oops something\'s gone wrong to get weather.</string>
 	
 	<string name="share_subject_txt">Your trusted employment manager</string>
-
+	
 	<string name="add_warn_pass_empty">Password must contain at least 6 characters</string>
 	<string name="add_warn_pass_retype">Passwords must be the same</string>
-
+	
 	<string name="txt_warn_logout">Are you sure to sign out?</string>
-
+	
 	<string name="txt_no_jobs">No jobs found</string>
 	<string name="txt_no_jobs_hint">But you can add a new one really quick</string>
+	
+	<string name="txt_tomorrow">Tomorrow at</string>
+	<string name="txt_today">Today at</string>
+	<string name="txt_ysterday">Yesterday at</string>
 
 </resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	
+	<string-array name="fields">
+		<item>Computers and Technology</item>
+		<item>Health Care and Allied Health</item>
+		<item>Education and Social Services</item>
+		<item>Arts and Communications</item>
+		<item>Trades and Transportation</item>
+		<item>Management, Business, and Finance</item>
+		<item>Architecture and Civil Engineering</item>
+		<item>Hospitality, Tourism, and the Service Industry</item>
+		<item>Science</item>
+		<item>Law and Law Enforcement</item>
+	</string-array>
+	
+</resources>

@@ -1,4 +1,4 @@
-package base
+package base.view
 
 import android.content.Context
 import androidx.appcompat.app.AlertDialog
@@ -17,7 +17,7 @@ class CustomDialogs : KoinComponent {
     fun showSimpleDialog(
             activityCtx: Context?,
             title: String,
-            msg: String,
+            msg: String?,
             haveCancel: Boolean? = false,
             customOkTxt: String? = null,
             customCancelTxt: String? = null,

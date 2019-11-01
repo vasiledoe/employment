@@ -7,8 +7,9 @@
 	<dimen name="fab_margin">16dp</dimen>
 	
 	<dimen name="custom_dim_1">1dp</dimen>
-	<dimen name="custom_dim_4">8dp</dimen>
+	<dimen name="custom_dim_4">4dp</dimen>
 	<dimen name="custom_dim_8">8dp</dimen>
+	<dimen name="custom_dim_12">12dp</dimen>
 	<dimen name="custom_dim_24">24dp</dimen>
 	
 	<dimen name="dim_2_rows_list_height">72dp</dimen>
