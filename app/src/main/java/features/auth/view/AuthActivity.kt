@@ -24,7 +24,7 @@ class AuthActivity : BaseActivity() {
 
         onBindModel()
 
-        openDesiredFrg(intent.getIntExtra(AUTH_EXTRA, 0))
+        openDesiredFrg(intent.getIntExtra(AUTH_EXTRA, LOGIN))
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -82,38 +82,4 @@ class AuthActivity : BaseActivity() {
         })
     }
 
-
-    private fun openDesiredFrg(whereToGo: Int) {
-        when (whereToGo) {
-            REGISTER -> switchFrgFromActivity(
-                    RegisterFrg(),
-                    true,
-                    R.id.container_for_fragments,
-                    "RegisterFrg"
-            )
-
-            RECOVERY -> switchFrgFromActivity(
-                    RecoveryFrg(),
-                    true,
-                    R.id.container_for_fragments,
-                    "RecoveryFrg"
-            )
-
-            //by default is LOGIN
-            else -> switchFrgFromActivity(
-                    LoginFrg(),
-                    false,
-                    R.id.container_for_fragments,
-                    "LoginFrg"
-            )
-        }
-    }
-
-
-    companion object {
-        val AUTH_EXTRA = "AUTH_EXTRA"
-        val LOGIN = 1
-        val REGISTER = 2
-        val RECOVERY = 3
-    }
 }

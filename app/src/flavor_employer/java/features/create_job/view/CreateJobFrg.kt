@@ -1,4 +1,4 @@
-package features.posted_jobs.view
+package features.create_job.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,25 +10,19 @@ import base.viewModel.BaseViewModel
 import com.bitplanet.employment.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class JobsFrg : BaseFrg(), View.OnClickListener {
+class CreateJobFrg : BaseFrg(), View.OnClickListener {
 
     private lateinit var mViewModel: BaseViewModel
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        onBindModel()
-    }
-
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?): View? {
-        val view: View = inflater.inflate(R.layout.frg_jobs, container, false)
+        val view: View = inflater.inflate(R.layout.frg_add_job, container, false)
 
         setupViews(view)
+
+        onBindModel()
 
         return view
     }
@@ -37,19 +31,19 @@ class JobsFrg : BaseFrg(), View.OnClickListener {
         val btnAddNewJob: FloatingActionButton = view.findViewById(R.id.btn_add)
         btnAddNewJob.setOnClickListener(this)
 
-        mViewModel.setToolbarTitle(resUtil.getStringRes(R.string.menu_home))
+        mViewModel.setToolbarTitle(resUtil.getStringRes(R.string.txt_add))
     }
 
     private fun onBindModel() {
         mViewModel = ViewModelProviders.of(this).get(BaseViewModel::class.java)
     }
 
-
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btn_add -> {
-                //todo
+            R.id.btn_create_job -> {
+
             }
         }
     }
+
 }

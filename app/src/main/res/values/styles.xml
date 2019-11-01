@@ -26,4 +26,9 @@
 		<item name="android:windowBackground">@drawable/bg_splash_screen</item>
 	</style>
 
+	<style name="TextViewSmall" parent="android:Widget.TextView">
+		<item name="android:textColor">@color/primary_text</item>
+		<item name="android:textSize">@dimen/txt_small</item>
+	</style>
+
 </resources>

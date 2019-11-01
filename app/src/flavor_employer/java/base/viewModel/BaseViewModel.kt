@@ -8,10 +8,14 @@ class BaseViewModel : ViewModel(), KoinComponent {
 
     val error = MutableLiveData<String>()
     val toolbarTitle = MutableLiveData<String>()
+    val goToFrgId = MutableLiveData<Int>()
 
 
     fun setToolbarTitle(title: String) {
         toolbarTitle.value = title
     }
 
+    fun goToFrg(extraId: Int) {
+        goToFrgId.value = extraId
+    }
 }
