@@ -6,8 +6,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import base.model.App
 import base.model.DefConstants
 import com.bitplanet.employment.R
 import com.google.android.material.snackbar.Snackbar
@@ -50,63 +48,24 @@ open class BaseActivity : AppCompatActivity() {
         viewLoading.visibility = View.GONE
     }
 
-//    protected fun switchFrgFromActivity(
-//            fragment: Fragment,
-//            isAddedToBackStack: Boolean,
-//            idContainer: Int,
-//            frgTag: String) {
-//        val fragmentTransaction = supportFragmentManager.beginTransaction()
-//        fragmentTransaction.replace(idContainer, fragment)
-//
-//        //add frg to system backstack
-//        if (isAddedToBackStack) {
-//            fragmentTransaction.addToBackStack(frgTag)
-//        }
-//
-//        fragmentTransaction.commitAllowingStateLoss()
-//    }
-
     protected fun switchFrgFromActivity(
             fragment: Fragment,
             isAddedToBackStack: Boolean,
             idContainer: Int,
             frgTag: String) {
-        logs.LOG("BaseActivity", "switchFrgFromActivity", "try go to: " + frgTag)
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
 
         fragmentTransaction.setCustomAnimations(
-                R.animator.fade_in,
-                R.animator.fade_out,
-                R.animator.fade_in,
-                R.animator.fade_out)
+            R.animator.fade_in,
+            R.animator.fade_out,
+            R.animator.fade_in,
+            R.animator.fade_out)
 
         fragmentTransaction.replace(idContainer, fragment, frgTag)
 
-        //add frg tag name to custom backstack fragment list
-        App.fragmentBackStack.add(frgTag)
-
-        //check if need to change frg - to ignore multiple open same frg
-        if (App.fragmentBackStack.size > 1) {
-            val lastFrgTag = App.fragmentBackStack.get(App.fragmentBackStack.size - 2)
-
-            //exclude frg tag name from custom backstack fragment list and exit
-            if (frgTag == lastFrgTag) {
-                logs.LOG("BaseActivity", "switchFrgFromActivity", "WARNING --> can't add this rg to backstack - already is the last one")
-                App.fragmentBackStack.removeAt(App.fragmentBackStack.size - 1)
-
-                return
-            }
-        }
-
         //add frg to system backstack
-        logs.LOG("BaseActivity", "switchFrgFromActivity", "go to frg --> " + frgTag)
         if (isAddedToBackStack) {
             fragmentTransaction.addToBackStack(frgTag)
-
-        } else {
-            App.fragmentBackStack.clear()
-            fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
 
         fragmentTransaction.commitAllowingStateLoss()

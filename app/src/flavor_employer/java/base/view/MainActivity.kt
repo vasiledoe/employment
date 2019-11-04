@@ -18,8 +18,8 @@ import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_sample.*
 
 class MainActivity : BaseActivity(),
-        NavigationView.OnNavigationItemSelectedListener,
-        View.OnClickListener {
+    NavigationView.OnNavigationItemSelectedListener,
+    View.OnClickListener {
 
     private lateinit var mToolbar: Toolbar
     private lateinit var mDrawerLayout: DrawerLayout
@@ -55,11 +55,11 @@ class MainActivity : BaseActivity(),
         mDrawerLayout = findViewById(R.id.drawer_layout)
 
         val toggle = ActionBarDrawerToggle(
-                this,
-                mDrawerLayout,
-                mToolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close
+            this,
+            mDrawerLayout,
+            mToolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
         mDrawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -105,9 +105,9 @@ class MainActivity : BaseActivity(),
             hideLoading(viewLoading = progress_bar)
 
             CustomDialogs().showSimpleDialog(
-                    activityCtx = this,
-                    title = resUtil.getStringRes(R.string.txt_error),
-                    msg = it
+                activityCtx = this,
+                title = resUtil.getStringRes(R.string.txt_error),
+                msg = it
             )
         })
     }

@@ -20,20 +20,16 @@ class JobsFrg : BaseFrg(), View.OnClickListener {
 
     private lateinit var mViewModel: BaseViewModel
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        onBindModel()
-    }
-
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view: View = inflater.inflate(R.layout.frg_jobs, container, false)
 
         setupViews(view)
+
+        onBindModel()
 
         return view
     }
@@ -59,8 +55,6 @@ class JobsFrg : BaseFrg(), View.OnClickListener {
     private fun setupViews(view: View) {
         val btnAddNewJob: FloatingActionButton = view.findViewById(R.id.btn_add)
         btnAddNewJob.setOnClickListener(this)
-
-        mViewModel.setToolbarTitle(resUtil.getStringRes(R.string.menu_home))
     }
 
     private fun loadItems(jobs: ArrayList<PostedJob>?) {
@@ -69,7 +63,9 @@ class JobsFrg : BaseFrg(), View.OnClickListener {
                 handleItmsVisibility(rv_itms, zone_no_items, HAS_ITEMS)
 
                 rv_itms.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-                val adapter = JobsAdapter(jobs, ({ selectedJob -> openAppliants() }))//todo de pus id de la doc
+                val adapter = JobsAdapter(
+                    jobs, ({ selectedJob -> openAppliants() })
+                )//todo de pus id de la doc
                 rv_itms.adapter = adapter
 
 
