@@ -22,9 +22,10 @@ class CreateJobFrg : BaseFrg(), View.OnClickListener {
 
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view: View = inflater.inflate(R.layout.frg_add_job, container, false)
 
         setupViews(view)
@@ -85,7 +86,12 @@ class CreateJobFrg : BaseFrg(), View.OnClickListener {
         fieldsSpinner.setSelection(0)
 
         fieldsSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parentView: AdapterView<*>, selectedItemView: View, position: Int, id: Long) {
+            override fun onItemSelected(
+                parentView: AdapterView<*>,
+                selectedItemView: View,
+                position: Int,
+                id: Long
+            ) {
                 mSelectedFieldId = position
                 adapter.setNewSelectedLang(position)
             }
@@ -96,21 +102,25 @@ class CreateJobFrg : BaseFrg(), View.OnClickListener {
     }
 
     private fun tryCreateJob() {
-        val job = Job(field = mSelectedFieldId,
-                title = et_title.text.toString(),
-                descr = et_descr.text.toString(),
+        val job = Job(
+            field = mSelectedFieldId,
+            title = et_title.text.toString(),
+            descr = et_descr.text.toString(),
 
-                address = if (cb_remote.isChecked) {
-                    resUtil.getStringRes(R.string.txt_remot)
-                } else {
-                    et_adress.text.toString()
-                },
+            address = if (cb_remote.isChecked) {
+                resUtil.getStringRes(R.string.txt_remot)
+            } else {
+                et_adress.text.toString()
+            },
 
-                price = if (cb_negociable.isChecked) {
-                    resUtil.getStringRes(R.string.txt_negociab)
-                } else {
-                    et_price.text.toString() + " Mdl"
-                })
+            phone = et_phone.text.toString(),
+
+            price = if (cb_negociable.isChecked) {
+                resUtil.getStringRes(R.string.txt_negociab)
+            } else {
+                et_price.text.toString() + " Mdl"
+            }
+        )
 
         if (mViewModel.isJobDataInserted(job)) {
             mViewModel.insertJob(job)

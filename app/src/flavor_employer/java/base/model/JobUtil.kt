@@ -12,10 +12,9 @@ class JobUtil {
         val KEY_PRICE = "price"
         val KEY_TIME = "time"
         val KEY_UID = "uid"
-
-
-        val KEY_JOB_STATUS_WAITING_TALENTS = "w"
-        val KEY_JOB_STATUS_IN_PROGRESS = "p"
+        val KEY_EMAIL = "email"
+        val KEY_PHONE = "phone"
+        val KEY_SEEN = "seen"
     }
 
 }

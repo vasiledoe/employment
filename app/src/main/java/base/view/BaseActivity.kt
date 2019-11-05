@@ -15,7 +15,8 @@ import features.auth.view.LoginFrg
 import features.auth.view.RecoveryFrg
 import features.auth.view.RegisterFrg
 import features.create_job.view.CreateJobFrg
-import features.posted_jobs.view.JobsFrg
+import features.list_jobs.view.JobsFrg
+import features.list_talents.view.TalentsFrg
 import features.settings.view.SettingsFrg
 import org.koin.android.ext.android.inject
 import utils.MyLogs
@@ -29,14 +30,14 @@ open class BaseActivity : AppCompatActivity() {
 
 
     protected fun showSnack(
-            coordinator: CoordinatorLayout,
-            txt: String,
-            isLongShow: Boolean
+        coordinator: CoordinatorLayout,
+        txt: String,
+        isLongShow: Boolean
     ) {
         Snackbar.make(
-                coordinator,
-                txt,
-                if (isLongShow) Snackbar.LENGTH_SHORT else Snackbar.LENGTH_LONG
+            coordinator,
+            txt,
+            if (isLongShow) Snackbar.LENGTH_SHORT else Snackbar.LENGTH_LONG
         ).show()
     }
 
@@ -49,17 +50,19 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     protected fun switchFrgFromActivity(
-            fragment: Fragment,
-            isAddedToBackStack: Boolean,
-            idContainer: Int,
-            frgTag: String) {
+        fragment: Fragment,
+        isAddedToBackStack: Boolean,
+        idContainer: Int,
+        frgTag: String
+    ) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
 
         fragmentTransaction.setCustomAnimations(
             R.animator.fade_in,
             R.animator.fade_out,
             R.animator.fade_in,
-            R.animator.fade_out)
+            R.animator.fade_out
+        )
 
         fragmentTransaction.replace(idContainer, fragment, frgTag)
 
@@ -74,12 +77,12 @@ open class BaseActivity : AppCompatActivity() {
     fun contactUs() {
         try {
             val emailIntent = Intent(
-                    Intent.ACTION_SENDTO,
-                    Uri.fromParts("mailto", DefConstants.SUPPORT_EMAIL, null)
+                Intent.ACTION_SENDTO,
+                Uri.fromParts("mailto", DefConstants.SUPPORT_EMAIL, null)
             )
             emailIntent.putExtra(
-                    Intent.EXTRA_SUBJECT,
-                    resUtil.getStringRes(R.string.app_name)
+                Intent.EXTRA_SUBJECT,
+                resUtil.getStringRes(R.string.app_name)
             )
             startActivity(emailIntent)
 
@@ -95,8 +98,8 @@ open class BaseActivity : AppCompatActivity() {
 
             intent.putExtra(Intent.EXTRA_SUBJECT, resUtil.getStringRes(R.string.share_subject_txt))
             intent.putExtra(
-                    Intent.EXTRA_TEXT,
-                    resUtil.getStringRes(R.string.share_message_body) + " at https://play.google.com/store/apps/details?id=" + packageName
+                Intent.EXTRA_TEXT,
+                resUtil.getStringRes(R.string.share_message_body) + " at https://play.google.com/store/apps/details?id=" + packageName
             )
             startActivity(intent)
 
@@ -108,60 +111,67 @@ open class BaseActivity : AppCompatActivity() {
 
     fun doSignOut() {
         CustomDialogs().showSimpleDialog(
-                activityCtx = this,
-                title = resUtil.getStringRes(R.string.txt_caution),
-                msg = resUtil.getStringRes(R.string.share_subject_txt),
-                callbackYes = {
-                    FirebaseAuth.getInstance().signOut()
-                    startActivity(Intent(this, AuthActivity::class.java))
-                    finish()
-                }
+            activityCtx = this,
+            title = resUtil.getStringRes(R.string.txt_caution),
+            msg = resUtil.getStringRes(R.string.txt_warn_logout),
+            haveCancel = true,
+            callbackYes = {
+                FirebaseAuth.getInstance().signOut()
+                startActivity(Intent(this, AuthActivity::class.java))
+                finish()
+            }
         )
-
     }
 
     fun openDesiredFrg(whereToGo: Int) {
         when (whereToGo) {
             REGISTER -> switchFrgFromActivity(
-                    RegisterFrg(),
-                    true,
-                    R.id.container_for_fragments,
-                    "RegisterFrg"
+                RegisterFrg(),
+                true,
+                R.id.container_for_fragments,
+                "RegisterFrg"
             )
 
             RECOVERY -> switchFrgFromActivity(
-                    RecoveryFrg(),
-                    true,
-                    R.id.container_for_fragments,
-                    "RecoveryFrg"
+                RecoveryFrg(),
+                true,
+                R.id.container_for_fragments,
+                "RecoveryFrg"
             )
 
             LOGIN -> switchFrgFromActivity(
-                    LoginFrg(),
-                    false,
-                    R.id.container_for_fragments,
-                    "LoginFrg"
+                LoginFrg(),
+                false,
+                R.id.container_for_fragments,
+                "LoginFrg"
             )
 
             CREATE_JOB_FRG -> switchFrgFromActivity(
-                    CreateJobFrg(),
-                    true,
-                    R.id.container_for_fragments,
-                    "CreateJobFrg"
+                CreateJobFrg(),
+                true,
+                R.id.container_for_fragments,
+                "CreateJobFrg"
             )
 
             JOBS_FRG -> switchFrgFromActivity(
-                    JobsFrg(),
-                    false,
-                    R.id.container_for_fragments,
-                    "JobsFrg"
+                JobsFrg(),
+                false,
+                R.id.container_for_fragments,
+                "JobsFrg"
+            )
+
+            TALENTS_FRG -> switchFrgFromActivity(
+                TalentsFrg(),
+                false,
+                R.id.container_for_fragments,
+                "TalentsFrg"
             )
 
             SETTINGS_FRG -> switchFrgFromActivity(
-                    SettingsFrg(),
-                    false,
-                    R.id.container_for_fragments,
-                    "SettingsFrg"
+                SettingsFrg(),
+                false,
+                R.id.container_for_fragments,
+                "SettingsFrg"
             )
         }
     }
@@ -175,6 +185,7 @@ open class BaseActivity : AppCompatActivity() {
 
         val CREATE_JOB_FRG = 4
         val JOBS_FRG = 5
-        val SETTINGS_FRG = 6
+        val TALENTS_FRG = 6
+        val SETTINGS_FRG = 7
     }
 }

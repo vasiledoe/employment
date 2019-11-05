@@ -6,20 +6,21 @@ import base.model.Job
 import base.model.MainRepo
 import com.bitplanet.employment.R
 import features.create_job.model.CreateJobRepo
-import features.create_job.model.OnInsertJobListener
-import features.posted_jobs.model.OnGetJobsListener
-import features.posted_jobs.model.PostedJob
-import features.posted_jobs.model.PostedJobsRepo
+import features.details_job.model.DetailsJobRepo
+import features.list_jobs.model.PostedJob
+import features.list_jobs.model.ListJobsRepo
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import utils.ResUtil
 
-class BaseViewModel : ViewModel(), OnInsertJobListener, OnGetJobsListener, KoinComponent {
+open class BaseViewModel : ViewModel(), KoinComponent {
 
     val toolbarTitle = MutableLiveData<String>()
     val loggedEmail = MutableLiveData<String>()
     val myJobs = MutableLiveData<ArrayList<PostedJob>>()
     val isJobPostedSuccess = MutableLiveData<Boolean>()
+    val isJobDeletedSuccess = MutableLiveData<Boolean>()
+    val postedJobDetails = MutableLiveData<PostedJob>()
 
     val error = MutableLiveData<String>()
     val isProgressLoading = MutableLiveData<Boolean>()
@@ -28,16 +29,25 @@ class BaseViewModel : ViewModel(), OnInsertJobListener, OnGetJobsListener, KoinC
 
     private val resUtil: ResUtil by inject()
     private val createJobRepo: CreateJobRepo by inject()
+    private val detailsJobRepo: DetailsJobRepo by inject()
     private val mainRepo: MainRepo by inject()
-    private val postedJobsRepo: PostedJobsRepo by inject()
+    private val listJobsRepo: ListJobsRepo by inject()
 
 
     fun setToolbarTitle(title: String) {
         toolbarTitle.value = title
     }
 
+    fun showLoggeUserEmail() {
+        loggedEmail.value = mainRepo.getLoggedUserEmail()
+    }
+
     fun goToFrg(extraId: Int) {
         goToFrgId.value = extraId
+    }
+
+    fun goToJobDetails(postedJob: PostedJob) {
+        postedJobDetails.value = postedJob
     }
 
     fun isJobDataInserted(job: Job): Boolean {
@@ -64,40 +74,54 @@ class BaseViewModel : ViewModel(), OnInsertJobListener, OnGetJobsListener, KoinC
         return true
     }
 
+    fun getDefErr() = resUtil.getStringRes(R.string.txt_oops)
+
+
     fun insertJob(job: Job) {
         isProgressLoading.value = true
 
-        createJobRepo.insertJob(job, listener = this@BaseViewModel)
+        createJobRepo.insertJob(
+            job = job,
+            successListener = {
+                isProgressLoading.value = false
+                isJobPostedSuccess.value = true
+            },
+            errListener = { err ->
+                isProgressLoading.value = false
+                error.value = err ?: getDefErr()
+            })
     }
 
-    fun showLoggeUserEmail() {
-        loggedEmail.value = mainRepo.getLoggedUserEmail()
+    fun deleteJob(id: String) {
+        isProgressLoading.value = true
+
+        detailsJobRepo.deleteJob(
+            id = id,
+            successListener = {
+                isProgressLoading.value = false
+                isJobDeletedSuccess.value = true
+            },
+            errListener = { err ->
+                isProgressLoading.value = false
+                error.value = err ?: getDefErr()
+            })
     }
 
     fun getMyPostedJobs() {
         isProgressLoading.value = true
 
-        postedJobsRepo.getJobs(listener = this@BaseViewModel)
-    }
-
-
-    override fun onInsertJobSuccess() {
-        isProgressLoading.value = false
-        isJobPostedSuccess.value = true
-    }
-
-    override fun onGetJobs(jobs: ArrayList<PostedJob>) {
-        isProgressLoading.value = false
-        myJobs.value = jobs
-    }
-
-    override fun onShowNoItems() {
-        isProgressLoading.value = false
-        myJobs.value = null
-    }
-
-    override fun onErrDb(err: String?) {
-        isProgressLoading.value = false
-        error.value = err
+        listJobsRepo.getJobs(
+            receivedIJobsListener = { jobs ->
+                isProgressLoading.value = false
+                myJobs.value = jobs
+            },
+            noItemsListener = {
+                isProgressLoading.value = false
+                myJobs.value = null
+            },
+            errListener = { err ->
+                isProgressLoading.value = false
+                error.value = err ?: getDefErr()
+            })
     }
 }

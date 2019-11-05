@@ -10,9 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import base.view.BaseActivity
 import com.google.android.material.navigation.NavigationView
+import features.settings.view.SettingsFrg
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener,
     View.OnClickListener {
 
     private lateinit var mDrawerLayout: DrawerLayout

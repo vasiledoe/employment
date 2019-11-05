@@ -17,7 +17,7 @@ class CustomDialogs : KoinComponent {
     fun showSimpleDialog(
             activityCtx: Context?,
             title: String,
-            msg: String?,
+            msg: String,
             haveCancel: Boolean? = false,
             customOkTxt: String? = null,
             customCancelTxt: String? = null,

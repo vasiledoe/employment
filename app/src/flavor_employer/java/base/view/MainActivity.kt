@@ -15,6 +15,7 @@ import base.view.BaseActivity
 import base.view.CustomDialogs
 import base.viewModel.BaseViewModel
 import com.google.android.material.navigation.NavigationView
+import features.details_job.view.DetailsFrg
 import kotlinx.android.synthetic.main.activity_sample.*
 
 class MainActivity : BaseActivity(),
@@ -88,7 +89,20 @@ class MainActivity : BaseActivity(),
             openDesiredFrg(it)
         })
 
+        mViewModel.postedJobDetails.observe(this, Observer {
+            switchFrgFromActivity(
+                DetailsFrg.newInstance(it),
+                true,
+                R.id.container_for_fragments,
+                "DetailsFrg"
+            )
+        })
+
         mViewModel.isJobPostedSuccess.observe(this, Observer {
+            this.onBackPressed()
+        })
+
+        mViewModel.isJobDeletedSuccess.observe(this, Observer {
             this.onBackPressed()
         })
 
@@ -119,6 +133,10 @@ class MainActivity : BaseActivity(),
             when (item.itemId) {
                 R.id.nav_home -> {
                     openDesiredFrg(JOBS_FRG)
+                }
+
+                R.id.nav_talents -> {
+                    openDesiredFrg(TALENTS_FRG)
                 }
 
                 R.id.nav_settings -> {
