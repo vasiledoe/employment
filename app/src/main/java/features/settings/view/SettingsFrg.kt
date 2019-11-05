@@ -3,9 +3,8 @@ package features.settings.view
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceFragmentCompat
-import base.viewModel.BaseViewModel
+import base.view_model.BaseViewModel
 import com.bitplanet.employment.R
-import features.auth.viewmodel.AuthViewModel
 
 
 class SettingsFrg : PreferenceFragmentCompat() {

@@ -2,6 +2,7 @@
 <resources>
 	
 	<string-array name="fields">
+		<item>Select a field</item>
 		<item>Computers and Technology</item>
 		<item>Health Care and Allied Health</item>
 		<item>Education and Social Services</item>

@@ -1,4 +1,4 @@
-package base.viewModel
+package base.view_model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -51,6 +51,11 @@ open class BaseViewModel : ViewModel(), KoinComponent {
     }
 
     fun isJobDataInserted(job: Job): Boolean {
+        if (job.field==0) {
+            error.value = resUtil.getStringRes(R.string.txt_select_field_warn)
+            return false
+        }
+
         if (job.title.isEmpty()) {
             error.value = resUtil.getStringRes(R.string.txt_title_warn)
             return false

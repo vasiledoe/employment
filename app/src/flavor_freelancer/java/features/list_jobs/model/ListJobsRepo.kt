@@ -21,7 +21,6 @@ class ListJobsRepo : MainRepo(), KoinComponent {
         errListener: (err: String?) -> Unit
     ) {
         dbInstance.collection(JobUtil.KEY_JOBS)
-            .whereEqualTo(JobUtil.KEY_UID, getLoggedUserTk())
             .get()
             .addOnSuccessListener { documents ->
                 if (documents != null) {

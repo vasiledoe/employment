@@ -11,10 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import base.view.BaseActivity
 import base.view.BaseFrg
-import base.view_model.BaseViewModel
+import base.viewModel.BaseViewModel
 import com.bitplanet.employment.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import features.list_jobs.model.PostedJob
 import kotlinx.android.synthetic.flavor_employer.frg_jobs.*
 
 class JobsFrg : BaseFrg(), View.OnClickListener {

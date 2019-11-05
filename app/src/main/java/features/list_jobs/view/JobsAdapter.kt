@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bitplanet.employment.R
 import features.list_jobs.model.DataFormatter
 import features.list_jobs.model.PostedJob
-import kotlinx.android.synthetic.flavor_employer.custom_job_item.view.*
+import kotlinx.android.synthetic.main.custom_job_item.view.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

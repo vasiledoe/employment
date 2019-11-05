@@ -8,7 +8,7 @@ import android.widget.Button
 import androidx.lifecycle.ViewModelProviders
 import base.view.BaseFrg
 import base.view.CustomDialogs
-import base.viewModel.BaseViewModel
+import base.view_model.BaseViewModel
 import com.bitplanet.employment.R
 import features.list_jobs.model.PostedJob
 import kotlinx.android.synthetic.flavor_employer.frg_details.*

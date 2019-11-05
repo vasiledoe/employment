@@ -1,4 +1,4 @@
-package features.create_job.view
+package base.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +11,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import utils.ResUtil
 
-class FieldsSpinnerAdapter(val mData: Array<String>) : BaseSpinnerAdapter(), KoinComponent {
+class FieldsSpinnerAdapter(private val mData: Array<String>) : BaseSpinnerAdapter(), KoinComponent {
 
     private var mSelectedPos: Int = 0
 

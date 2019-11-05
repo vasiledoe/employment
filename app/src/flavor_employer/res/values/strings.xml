@@ -22,12 +22,12 @@
     <string name="txt_job_det">Job details</string>
     <string name="txt_talents">talents</string>
 
-    <string name="txt_select_field_warn">Field is not selected</string>
-    <string name="txt_title_warn">Title cannot be empty</string>
-    <string name="txt_descr_warn">Description cannot be empty</string>
-    <string name="txt_adres_warn">Address cannot be empty</string>
-    <string name="txt_price_warn">Price cannot be empty</string>
-    <string name="txt_no_aplicants">No applicants yet</string>
+    <string name="txt_select_field_warn">Field is not selected!</string>
+    <string name="txt_title_warn">Title cannot be empty!</string>
+    <string name="txt_descr_warn">Description cannot be empty!</string>
+    <string name="txt_adres_warn">Address cannot be empty!</string>
+    <string name="txt_price_warn">Price cannot be empty!</string>
+
     <string name="txt_ask_delete_job">Are you sure to delete this job?</string>
 
 </resources>

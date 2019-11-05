@@ -11,7 +11,8 @@ import android.widget.Spinner
 import androidx.lifecycle.ViewModelProviders
 import base.model.Job
 import base.view.BaseFrg
-import base.viewModel.BaseViewModel
+import base.view.FieldsSpinnerAdapter
+import base.view_model.BaseViewModel
 import com.bitplanet.employment.R
 import kotlinx.android.synthetic.flavor_employer.frg_add_job.*
 

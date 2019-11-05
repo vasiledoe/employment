@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import base.view.BaseActivity
 import base.view.CustomDialogs
-import base.viewModel.BaseViewModel
+import base.view_model.BaseViewModel
 import com.google.android.material.navigation.NavigationView
 import features.details_job.view.DetailsFrg
 import kotlinx.android.synthetic.main.activity_sample.*
