@@ -3,13 +3,13 @@ package features.settings.view
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceFragmentCompat
-import base.view_model.BaseViewModel
+import base.view_model.FlavorViewModel
 import com.bitplanet.employment.R
 
 
 class SettingsFrg : PreferenceFragmentCompat() {
 
-    private lateinit var mViewModel: BaseViewModel
+    private lateinit var mViewModel: FlavorViewModel
 
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -20,7 +20,7 @@ class SettingsFrg : PreferenceFragmentCompat() {
 
     private fun onBindModel() {
         activity?.let {
-            mViewModel = ViewModelProviders.of(it).get(BaseViewModel::class.java)
+            mViewModel = ViewModelProviders.of(it).get(FlavorViewModel::class.java)
             mViewModel.setToolbarTitle(resources.getString(R.string.menu_settings))
         }
     }

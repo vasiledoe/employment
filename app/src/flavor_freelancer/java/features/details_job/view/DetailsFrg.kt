@@ -1,5 +1,7 @@
 package features.details_job.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import base.model.PrettyFormattedJob
 import base.view.BaseFrg
-import base.view.CustomDialogs
 import base.view_model.FlavorViewModel
 import com.bitplanet.employment.R
-import kotlinx.android.synthetic.flavor_employer.frg_job_details.*
+import kotlinx.android.synthetic.flavor_freelancer.frg_job_details.*
 
 class DetailsFrg : BaseFrg() {
 
@@ -83,8 +84,10 @@ class DetailsFrg : BaseFrg() {
 
 
     private fun setupViews(view: View) {
-        val btnRemove: Button = view.findViewById(R.id.btn_remove_job)
-        btnRemove.setOnClickListener { askDeleteJob() }
+        val btnCall: Button = view.findViewById(R.id.btn_call)
+        btnCall.setOnClickListener { openCall() }
+        val btnEmail: Button = view.findViewById(R.id.btn_email)
+        btnEmail.setOnClickListener { openEmail() }
     }
 
     private fun loadViews() {
@@ -93,17 +96,41 @@ class DetailsFrg : BaseFrg() {
             rv_itms.adapter = DetailsItemsAdapter(
                 items = formatter.getJobDetailItems(it)
             )
+
+            it.phone?.let {
+                btn_call.visibility = View.VISIBLE
+            }
+
+            mViewModel.doIncrementSeenCoounter(it.id)
         }
     }
 
+    private fun openEmail() {
+        val email = prettyFormattedJob?.email
 
-    private fun askDeleteJob() {
-        CustomDialogs().showSimpleDialog(
-            activityCtx = activity,
-            title = resUtil.getStringRes(R.string.txt_caution),
-            msg = resUtil.getStringRes(R.string.txt_ask_delete_job),
-            haveCancel = true,
-            callbackYes = { prettyFormattedJob?.id?.let { mViewModel.deleteJob(it) } }
-        )
+        try {
+            val emailIntent = Intent(
+                Intent.ACTION_SENDTO,
+                Uri.fromParts("mailto", email, null)
+            )
+
+            startActivity(emailIntent)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun openCall() {
+        val phone = prettyFormattedJob?.phone
+
+        try {
+            val callIntent = Intent(Intent.ACTION_VIEW)
+            callIntent.setData(Uri.parse("tel:" + phone))
+            startActivity(callIntent)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }

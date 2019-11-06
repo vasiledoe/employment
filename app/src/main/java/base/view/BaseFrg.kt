@@ -5,6 +5,7 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import org.koin.android.ext.android.inject
+import utils.DataFormatter
 import utils.MyLogs
 import utils.ResUtil
 
@@ -12,6 +13,7 @@ open class BaseFrg : Fragment() {
 
     protected val resUtil: ResUtil by inject()
     protected val logs: MyLogs by inject()
+    protected val formatter: DataFormatter by inject()
 
 
     protected fun handleItmsVisibility(rvItms: RecyclerView, zoneNoItms: LinearLayout, status: Int) {

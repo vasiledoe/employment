@@ -6,7 +6,6 @@
 	<string name="nav_header_desc">Navigation header</string>
 	<string name="action_settings">Settings</string>
 	
-	<string name="menu_offers">My proposals</string>
 	<string name="menu_settings">Settings</string>
 	<string name="menu_communicate">Communicate</string>
 	<string name="menu_share">Share this app</string>
@@ -49,10 +48,40 @@
 	<string name="txt_warn_logout">Are you sure to sign out?</string>
 	
 	<string name="txt_no_jobs">No jobs found</string>
-	<string name="txt_no_jobs_hint">But you can add a new one really quick</string>
-	
+
 	<string name="txt_tomorrow">Tomorrow at</string>
 	<string name="txt_today">Today at</string>
 	<string name="txt_ysterday">Yesterday at</string>
+
+	<string name="txt_select_field">Select field</string>
+	<string name="txt_applicants">Applicants</string>
+	<string name="txt_phone">Phone (optional)</string>
+	<string name="txt_save_pub">Save &amp; publish my talent</string>
+
+
+	<string name="txt_select_field_warn">Field is not selected!</string>
+	<string name="txt_title_warn">Title cannot be empty!</string>
+	<string name="txt_descr_warn">Description cannot be empty!</string>
+	<string name="txt_adres_warn">Address cannot be empty!</string>
+	<string name="txt_price_warn">Price cannot be empty!</string>
+	<string name="txt_phone_warn">Incorrect phone number format!</string>
+
+
+	<string name="txt_job_det">Job details</string>
+	<string name="txt_field">Field</string>
+	<string name="txt_adres">Address</string>
+	<string name="txt_date">Creation date</string>
+	<string name="txt_phone_only">Phone</string>
+	<string name="txt_email_only">Email</string>
+
+	<string name="txt_seen">Seen by</string>
+	<string name="txt_talents">talents</string>
+	<string name="txt_remove">Remove job</string>
+	<string name="txt_call">Call</string>
+	<string name="txt_send_email">Send email</string>
+	<string name="txt_remot">Remote</string>
+	<string name="txt_negociab">Negotiable</string>
+
+	<string name="txt_ask_delete_job">Are you sure to delete this job?</string>
 
 </resources>

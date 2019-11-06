@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/zone_field"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim_1_row_list_height"
+            android:background="@drawable/bg_rounded_rect_contur">
+
+            <Spinner
+                android:id="@+id/spinner_fields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/zone_field"
+            android:layout_marginTop="@dimen/custom_dim_8"
+            android:hint="@string/txt_title"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_title"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences"
+                android:nextFocusDown="@+id/et_descr" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_descr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ti_title"
+            android:layout_marginTop="@dimen/custom_dim_8"
+            android:hint="@string/txt_descr"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_descr"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences"
+                android:nextFocusDown="@+id/et_adress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_adress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ti_descr"
+            android:layout_marginTop="@dimen/custom_dim_8"
+            android:hint="@string/txt_adres"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_adress"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences"
+                android:nextFocusDown="@+id/et_phone"
+                android:singleLine="true" />
+
+            <CheckBox
+                android:id="@+id/cb_remote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ti_adress"
+                android:text="@string/txt_remot"
+                android:textColor="@color/secondary_text"
+                android:textSize="@dimen/txt_small" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ti_adress"
+            android:layout_marginTop="@dimen/custom_dim_8"
+            android:hint="@string/txt_phone"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_phone"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:nextFocusDown="@+id/et_price" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ti_phone"
+            android:layout_marginTop="@dimen/custom_dim_8"
+            android:hint="@string/txt_price"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_price"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:maxLength="8"
+                android:singleLine="true" />
+
+            <CheckBox
+                android:id="@+id/cb_negociable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ti_price"
+                android:text="@string/txt_negociab"
+                android:textColor="@color/secondary_text"
+                android:textSize="@dimen/txt_small" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_create_job"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dim_1_row_list_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/accent"
+        android:onClick="onClick"
+        android:text="@string/txt_postjb"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_medium_xs"
+        android:textStyle="bold" />
+
+</RelativeLayout>

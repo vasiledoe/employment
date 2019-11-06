@@ -3,4 +3,13 @@
 	<string name="menu_home">Job offers</string>
 	<string name="share_message_body">Simple tool to find best jobs</string>
 
+	<string name="menu_account">Edit talent account</string>
+	<string name="txt_no_jobs_hint">But you can try it again later</string>
+
+	<string name="txt_price">Price per hour in MDL</string>
+	<string name="txt_descr">Tell us about yourself</string>
+	<string name="txt_exp">Brief about previous experience</string>
+	<string name="txt_title">Talent title</string>
+	<string name="txt_exp_warn">Experience cannot be empty!</string>
+
 </resources>

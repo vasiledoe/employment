@@ -2,9 +2,11 @@ package features.list_jobs.model
 
 import base.model.JobUtil
 import base.model.MainRepo
+import base.model.PrettyFormattedJob
 import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import utils.DataFormatter
 
 class ListJobsRepo : MainRepo(), KoinComponent {
 
@@ -16,7 +18,7 @@ class ListJobsRepo : MainRepo(), KoinComponent {
 
 
     fun getJobs(
-        receivedIJobsListener: (jobs: ArrayList<PostedJob>) -> Unit,
+        receivedIJobsListener: (jobs: ArrayList<PrettyFormattedJob>) -> Unit,
         noItemsListener: () -> Unit,
         errListener: (err: String?) -> Unit
     ) {

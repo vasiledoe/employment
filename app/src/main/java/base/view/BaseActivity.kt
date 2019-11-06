@@ -14,9 +14,7 @@ import features.auth.view.AuthActivity
 import features.auth.view.LoginFrg
 import features.auth.view.RecoveryFrg
 import features.auth.view.RegisterFrg
-import features.create_job.view.CreateJobFrg
 import features.list_jobs.view.JobsFrg
-import features.list_talents.view.TalentsFrg
 import features.settings.view.SettingsFrg
 import org.koin.android.ext.android.inject
 import utils.MyLogs
@@ -146,25 +144,11 @@ open class BaseActivity : AppCompatActivity() {
                 "LoginFrg"
             )
 
-            CREATE_JOB_FRG -> switchFrgFromActivity(
-                CreateJobFrg(),
-                true,
-                R.id.container_for_fragments,
-                "CreateJobFrg"
-            )
-
             JOBS_FRG -> switchFrgFromActivity(
                 JobsFrg(),
                 false,
                 R.id.container_for_fragments,
                 "JobsFrg"
-            )
-
-            TALENTS_FRG -> switchFrgFromActivity(
-                TalentsFrg(),
-                false,
-                R.id.container_for_fragments,
-                "TalentsFrg"
             )
 
             SETTINGS_FRG -> switchFrgFromActivity(
@@ -184,8 +168,9 @@ open class BaseActivity : AppCompatActivity() {
         val RECOVERY = 3
 
         val CREATE_JOB_FRG = 4
-        val JOBS_FRG = 5
-        val TALENTS_FRG = 6
-        val SETTINGS_FRG = 7
+        val EDIT_TALENT_FRG = 5
+        val JOBS_FRG = 6
+        val TALENTS_FRG = 7
+        val SETTINGS_FRG = 8
     }
 }

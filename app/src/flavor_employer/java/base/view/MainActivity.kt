@@ -3,31 +3,20 @@ package com.bitplanet.employment
 import android.os.Bundle
 import android.os.Handler
 import android.view.MenuItem
-import android.view.View
-import android.widget.TextView
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import base.view.BaseActivity
+import base.view.BaseMainActivity
 import base.view.CustomDialogs
-import base.view_model.BaseViewModel
-import com.google.android.material.navigation.NavigationView
+import base.view_model.FlavorViewModel
+import features.create_job.view.CreateJobFrg
 import features.details_job.view.DetailsFrg
+import features.list_talents.view.TalentsFrg
 import kotlinx.android.synthetic.main.activity_sample.*
 
-class MainActivity : BaseActivity(),
-    NavigationView.OnNavigationItemSelectedListener,
-    View.OnClickListener {
+class MainActivity : BaseMainActivity() {
 
-    private lateinit var mToolbar: Toolbar
-    private lateinit var mDrawerLayout: DrawerLayout
-    private lateinit var mNavigationView: NavigationView
-    private lateinit var mTvLoggedUserEmail: TextView
-
-    private lateinit var mViewModel: BaseViewModel
+    private lateinit var mViewModel: FlavorViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,40 +31,13 @@ class MainActivity : BaseActivity(),
     }
 
 
-    private fun setupViews() {
-        setupDrawer()
-
-        val headerView = mNavigationView.getHeaderView(0)
-        mTvLoggedUserEmail = headerView.findViewById(R.id.tv_email)
-    }
-
-    private fun setupDrawer() {
-        mToolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(mToolbar)
-
-        mDrawerLayout = findViewById(R.id.drawer_layout)
-
-        val toggle = ActionBarDrawerToggle(
-            this,
-            mDrawerLayout,
-            mToolbar,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
-        )
-        mDrawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-
-        mNavigationView = findViewById(R.id.nav_view)
-        mNavigationView.setNavigationItemSelectedListener(this)
-    }
-
     private fun fillUpInitialData() {
         mViewModel.showLoggeUserEmail()
         onNavigationItemSelected(mNavigationView.menu.findItem(R.id.nav_home))
     }
 
     private fun onBindModel() {
-        mViewModel = ViewModelProviders.of(this).get(BaseViewModel::class.java)
+        mViewModel = ViewModelProviders.of(this).get(FlavorViewModel::class.java)
 
         mViewModel.toolbarTitle.observe(this, Observer {
             supportActionBar?.title = it
@@ -86,10 +48,16 @@ class MainActivity : BaseActivity(),
         })
 
         mViewModel.goToFrgId.observe(this, Observer {
-            openDesiredFrg(it)
+            //check if these frgs are specific only to this flavor
+            if (it == CREATE_JOB_FRG || it == TALENTS_FRG) {
+                openSpecificFlavorDesiredFrg(it)
+
+            } else {
+                openDesiredFrg(it)
+            }
         })
 
-        mViewModel.postedJobDetails.observe(this, Observer {
+        mViewModel.jobDetails.observe(this, Observer {
             switchFrgFromActivity(
                 DetailsFrg.newInstance(it),
                 true,
@@ -136,7 +104,7 @@ class MainActivity : BaseActivity(),
                 }
 
                 R.id.nav_talents -> {
-                    openDesiredFrg(TALENTS_FRG)
+                    openSpecificFlavorDesiredFrg(TALENTS_FRG)
                 }
 
                 R.id.nav_settings -> {
@@ -157,20 +125,23 @@ class MainActivity : BaseActivity(),
         return true
     }
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.btn_logout -> {
-                doSignOut()
-            }
+
+    fun openSpecificFlavorDesiredFrg(whereToGo: Int) {
+        when (whereToGo) {
+            CREATE_JOB_FRG -> switchFrgFromActivity(
+                CreateJobFrg(),
+                true,
+                R.id.container_for_fragments,
+                "CreateJobFrg"
+            )
+
+            TALENTS_FRG -> switchFrgFromActivity(
+                TalentsFrg(),
+                false,
+                R.id.container_for_fragments,
+                "TalentsFrg"
+            )
         }
     }
 
-    override fun onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout.closeDrawer(GravityCompat.START)
-
-        } else {
-            super.onBackPressed()
-        }
-    }
 }

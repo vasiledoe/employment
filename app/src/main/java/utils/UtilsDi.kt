@@ -7,5 +7,6 @@ val utilsModule = module {
 
     single<MyLogs>()
     single<ResUtil>()
+    single<DataFormatter>()
 
 }

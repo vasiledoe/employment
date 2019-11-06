@@ -21,6 +21,8 @@
             android:layout_marginEnd="@dimen/custom_dim_8"
             android:layout_toStartOf="@+id/tv_time"
             android:textColor="@color/primary"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textStyle="bold"
             android:textSize="@dimen/txt_medium_xs"
             tools:text="Need to create an Andorid app" />
@@ -47,6 +49,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/secondary_text"
         android:textSize="@dimen/txt_small"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textStyle="bold"
         tools:text="Computers and Technology" />
 
@@ -55,6 +59,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/custom_dim_8"
+        android:ellipsize="end"
+        android:maxLines="3"
         android:textColor="@color/primary_text"
         android:textSize="@dimen/txt_small"
         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />

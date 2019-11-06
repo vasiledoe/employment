@@ -1,4 +1,4 @@
-package features.create_job.view
+package features.edit_talent_account.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,17 +8,20 @@ import android.widget.AdapterView
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Spinner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import base.model.Job
+import base.model.Talent
 import base.view.BaseFrg
 import base.view.FieldsSpinnerAdapter
 import base.view_model.FlavorViewModel
 import com.bitplanet.employment.R
-import kotlinx.android.synthetic.flavor_employer.frg_create_job.*
+import kotlinx.android.synthetic.flavor_freelancer.frg_edit_talent.*
 
-class CreateJobFrg : BaseFrg() {
+class EditTalentFrg : BaseFrg() {
 
     private lateinit var mViewModel: FlavorViewModel
+    private var mFieldsSpinnerAdapter: FieldsSpinnerAdapter? = null
+    private lateinit var mFieldsSpinner: Spinner
     private var mSelectedFieldId: Int = 0
 
 
@@ -27,7 +30,7 @@ class CreateJobFrg : BaseFrg() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.frg_create_job, container, false)
+        val view: View = inflater.inflate(R.layout.frg_edit_talent, container, false)
 
         setupViews(view)
 
@@ -39,19 +42,24 @@ class CreateJobFrg : BaseFrg() {
     override fun onResume() {
         super.onResume()
 
-        mViewModel.setToolbarTitle(resUtil.getStringRes(R.string.txt_add))
+        mViewModel.setToolbarTitle(resUtil.getStringRes(R.string.menu_account))
+        mViewModel.getMyTalent()
     }
 
 
     private fun onBindModel() {
         activity?.let {
             mViewModel = ViewModelProviders.of(it).get(FlavorViewModel::class.java)
+
+            mViewModel.myTalent.observe(it, Observer { myTalent ->
+                myTalent?.let { view?.let { loadData(myTalent) } }
+            })
         }
     }
 
     private fun setupViews(view: View) {
-        val btnAddNewJob: Button = view.findViewById(R.id.btn_create_job)
-        btnAddNewJob.setOnClickListener{tryCreateJob()}
+        val btnAddSave: Button = view.findViewById(R.id.btn_save_talent)
+        btnAddSave.setOnClickListener { tryEditTalent() }
 
         val cbRemote: CheckBox = view.findViewById(R.id.cb_remote)
         cbRemote.setOnCheckedChangeListener { _, isChecked ->
@@ -78,15 +86,14 @@ class CreateJobFrg : BaseFrg() {
         loadFields(view)
     }
 
-
     private fun loadFields(view: View) {
-        val fieldsSpinner: Spinner = view.findViewById(R.id.spinner_fields)
-        val adapter = FieldsSpinnerAdapter(resUtil.getStringArrayRes(R.array.fields))
+        mFieldsSpinner = view.findViewById(R.id.spinner_fields)
+        mFieldsSpinnerAdapter = FieldsSpinnerAdapter(resUtil.getStringArrayRes(R.array.fields))
 
-        fieldsSpinner.adapter = adapter
-        fieldsSpinner.setSelection(0)
+        mFieldsSpinner.adapter = mFieldsSpinnerAdapter
+        mFieldsSpinner.setSelection(0)
 
-        fieldsSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        mFieldsSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parentView: AdapterView<*>,
                 selectedItemView: View?,
@@ -94,19 +101,43 @@ class CreateJobFrg : BaseFrg() {
                 id: Long
             ) {
                 mSelectedFieldId = position
-                adapter.setNewSelectedLang(position)
+                mFieldsSpinnerAdapter?.setNewSelectedLang(position)
             }
 
             override fun onNothingSelected(parentView: AdapterView<*>) {}
         }
-
     }
 
-    private fun tryCreateJob() {
-        val job = Job(
+    private fun loadData(talent: Talent) {
+        et_title.setText(talent.title)
+        et_descr.setText(talent.descr)
+        et_exp.setText(talent.exp)
+        et_adress.setText(talent.address)
+        et_phone.setText(talent.phone)
+
+        if (talent.price == -1) {
+            cb_negociable.isChecked = true
+            et_price.isEnabled = false
+
+        } else {
+            cb_negociable.isChecked = false
+            et_price.isEnabled = true
+            et_price.setText(talent.price.toString())
+        }
+
+        mFieldsSpinnerAdapter?.let {
+            mFieldsSpinner.setSelection(talent.field)
+            it.setNewSelectedLang(talent.field)
+        }
+    }
+
+
+    private fun tryEditTalent() {
+        val talent = Talent(
             field = mSelectedFieldId,
             title = et_title.text.toString(),
             descr = et_descr.text.toString(),
+            exp = et_exp.text.toString(),
 
             address = if (cb_remote.isChecked) {
                 resUtil.getStringRes(R.string.txt_remot)
@@ -123,9 +154,8 @@ class CreateJobFrg : BaseFrg() {
             }
         )
 
-        if (mViewModel.isJobDataInserted(job)) {
-            mViewModel.insertJob(job)
+        if (mViewModel.isTalentDataInserted(talent)) {
+            mViewModel.saveUpdateTalent(talent)
         }
     }
-
 }

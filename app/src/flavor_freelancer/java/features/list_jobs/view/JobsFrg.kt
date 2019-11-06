@@ -4,22 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.Spinner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import base.view.BaseActivity
+import base.model.PrettyFormattedJob
 import base.view.BaseFrg
-import base.viewModel.BaseViewModel
+import base.view.FieldsSpinnerAdapter
+import base.view_model.FlavorViewModel
 import com.bitplanet.employment.R
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.flavor_employer.frg_jobs.*
+import kotlinx.android.synthetic.flavor_freelancer.frg_jobs.*
 
-class JobsFrg : BaseFrg(), View.OnClickListener {
+class JobsFrg : BaseFrg() {
 
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
-    private lateinit var mViewModel: BaseViewModel
+    private lateinit var mViewModel: FlavorViewModel
+
+    private var mSelectedFieldId: Int = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,29 +44,53 @@ class JobsFrg : BaseFrg(), View.OnClickListener {
         super.onResume()
 
         mViewModel.setToolbarTitle(resUtil.getStringRes(R.string.menu_home))
-        mViewModel.getMyPostedJobs()
+        mViewModel.getJobs(mSelectedFieldId)
     }
 
 
     private fun onBindModel() {
         activity?.let {
-            mViewModel = ViewModelProviders.of(it).get(BaseViewModel::class.java)
+            mViewModel = ViewModelProviders.of(it).get(FlavorViewModel::class.java)
 
-            mViewModel.myJobs.observe(it, Observer { items ->
+            mViewModel.jobs.observe(it, Observer { items ->
                 view?.let { loadItems(items) }
             })
         }
     }
 
     private fun setupViews(view: View) {
-        val btnAddNewJob: FloatingActionButton = view.findViewById(R.id.btn_add)
-        btnAddNewJob.setOnClickListener(this)
-
         mSwipeRefreshLayout = view.findViewById(R.id.swipe_zone)
-        mSwipeRefreshLayout.setOnRefreshListener { mViewModel.getMyPostedJobs() }
+        mSwipeRefreshLayout.setOnRefreshListener { mViewModel.getJobs(mSelectedFieldId) }
+
+        loadFields(view)
     }
 
-    private fun loadItems(jobs: ArrayList<PostedJob>?) {
+    private fun loadFields(view: View) {
+        val fieldsSpinner: Spinner = view.findViewById(R.id.spinner_fields)
+        val adapter = FieldsSpinnerAdapter(resUtil.getStringArrayRes(R.array.fields))
+
+        fieldsSpinner.adapter = adapter
+        fieldsSpinner.setSelection(0)
+
+        fieldsSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parentView: AdapterView<*>,
+                selectedItemView: View?,
+                position: Int,
+                id: Long
+            ) {
+                mSelectedFieldId = position
+                adapter.setNewSelectedLang(position)
+
+                mViewModel.getJobs(mSelectedFieldId)
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>) {}
+        }
+
+    }
+
+    private fun loadItems(jobs: ArrayList<PrettyFormattedJob>?) {
         mSwipeRefreshLayout.isRefreshing = false
 
         if (jobs != null) {
@@ -80,15 +109,6 @@ class JobsFrg : BaseFrg(), View.OnClickListener {
 
         } else {
             handleItmsVisibility(rv_itms, zone_no_items, NO_ITEMS)
-        }
-    }
-
-
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.btn_add -> {
-                mViewModel.goToFrg(BaseActivity.CREATE_JOB_FRG)
-            }
         }
     }
 }

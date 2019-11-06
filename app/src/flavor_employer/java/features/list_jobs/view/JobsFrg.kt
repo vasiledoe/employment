@@ -9,18 +9,18 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import base.model.PrettyFormattedJob
 import base.view.BaseActivity
 import base.view.BaseFrg
-import base.view_model.BaseViewModel
+import base.view_model.FlavorViewModel
 import com.bitplanet.employment.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import features.list_jobs.model.PostedJob
 import kotlinx.android.synthetic.flavor_employer.frg_jobs.*
 
 class JobsFrg : BaseFrg(), View.OnClickListener {
 
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
-    private lateinit var mViewModel: BaseViewModel
+    private lateinit var mViewModel: FlavorViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,9 +46,9 @@ class JobsFrg : BaseFrg(), View.OnClickListener {
 
     private fun onBindModel() {
         activity?.let {
-            mViewModel = ViewModelProviders.of(it).get(BaseViewModel::class.java)
+            mViewModel = ViewModelProviders.of(it).get(FlavorViewModel::class.java)
 
-            mViewModel.myJobs.observe(it, Observer { items ->
+            mViewModel.jobs.observe(it, Observer { items ->
                 view?.let { loadItems(items) }
             })
         }
@@ -62,7 +62,7 @@ class JobsFrg : BaseFrg(), View.OnClickListener {
         mSwipeRefreshLayout.setOnRefreshListener { mViewModel.getMyPostedJobs() }
     }
 
-    private fun loadItems(jobs: ArrayList<PostedJob>?) {
+    private fun loadItems(jobs: ArrayList<PrettyFormattedJob>?) {
         mSwipeRefreshLayout.isRefreshing = false
 
         if (jobs != null) {

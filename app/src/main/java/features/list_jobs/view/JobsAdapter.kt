@@ -7,15 +7,15 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bitplanet.employment.R
-import features.list_jobs.model.DataFormatter
-import features.list_jobs.model.PostedJob
+import utils.DataFormatter
+import base.model.PrettyFormattedJob
 import kotlinx.android.synthetic.main.custom_job_item.view.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class JobsAdapter(
-    private val items: ArrayList<PostedJob>,
-    private val clieckedItmListener: (PostedJob) -> Unit
+    private val items: ArrayList<PrettyFormattedJob>,
+    private val clieckedItmListener: (PrettyFormattedJob) -> Unit
 ) : RecyclerView.Adapter<JobsAdapter.ViewHolder>(), KoinComponent {
 
     private val dataFormatter: DataFormatter by inject()

@@ -12,8 +12,9 @@
 	<dimen name="custom_dim_12">12dp</dimen>
 	<dimen name="custom_dim_24">24dp</dimen>
 	
+	<dimen name="dim_1_row_list_height">48dp</dimen>
 	<dimen name="dim_2_rows_list_height">72dp</dimen>
-	
+
 	<!--static sizes for text-->
 	<dimen name="txt_small_xs">12dp</dimen>
 	<dimen name="txt_small">14dp</dimen>
