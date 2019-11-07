@@ -9,7 +9,10 @@
     <string name="txt_price">Price in MDL</string>
     <string name="txt_descr">Full job description</string>
     <string name="txt_title">Job title</string>
+    <string name="txt_exp">Work experience</string>
 
     <string name="txt_no_jobs_hint">But you can add a new one really quick</string>
+    <string name="txt_no_talents">No talents found</string>
+    <string name="txt_no_talents_hint">But you can try it later</string>
 
 </resources>

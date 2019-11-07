@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import base.model.MainRepo
 import base.model.PrettyFormattedJob
+import base.model.PrettyFormattedTalent
 import com.bitplanet.employment.R
 import features.list_jobs.model.ListJobsRepo
 import org.koin.core.KoinComponent
@@ -16,6 +17,7 @@ open class BaseViewModel : ViewModel(), KoinComponent {
     val loggedEmail = MutableLiveData<String>()
     val jobs = MutableLiveData<ArrayList<PrettyFormattedJob>>()
     val jobDetails = MutableLiveData<PrettyFormattedJob>()
+    val talentDetails = MutableLiveData<PrettyFormattedTalent>()
 
     val error = MutableLiveData<String>()
     val isProgressLoading = MutableLiveData<Boolean>()
@@ -41,6 +43,10 @@ open class BaseViewModel : ViewModel(), KoinComponent {
 
     fun goToJobDetails(prettyFormattedJob: PrettyFormattedJob) {
         jobDetails.value = prettyFormattedJob
+    }
+
+    fun goToTalentDetails(prettyFormattedJob: PrettyFormattedTalent) {
+        talentDetails.value = prettyFormattedJob
     }
 
     fun getDefErr() = resUtil.getStringRes(R.string.txt_oops)

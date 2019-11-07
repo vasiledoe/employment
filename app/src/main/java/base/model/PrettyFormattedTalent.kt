@@ -7,6 +7,7 @@ import android.os.Parcelable
  * used for ready to show data beans in adapter
  */
 data class PrettyFormattedTalent(
+    val id:String?,
     var field: String?,
     var title: String?,
     var descr: String?,
@@ -28,10 +29,12 @@ data class PrettyFormattedTalent(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readString(),
         parcel.readString()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
         parcel.writeString(field)
         parcel.writeString(title)
         parcel.writeString(descr)

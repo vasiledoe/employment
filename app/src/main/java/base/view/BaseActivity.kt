@@ -171,6 +171,7 @@ open class BaseActivity : AppCompatActivity() {
         val EDIT_TALENT_FRG = 5
         val JOBS_FRG = 6
         val TALENTS_FRG = 7
-        val SETTINGS_FRG = 8
+        val TALENTS_details_FRG = 8
+        val SETTINGS_FRG = 9
     }
 }

@@ -3,6 +3,7 @@ package utils
 import android.text.format.DateFormat
 import base.model.Job
 import base.model.PrettyFormattedJob
+import base.model.PrettyFormattedTalent
 import base.model.Talent
 import com.bitplanet.employment.R
 import com.google.firebase.firestore.DocumentSnapshot
@@ -122,6 +123,67 @@ class DataFormatter : KoinComponent {
         return null
     }
 
+    fun getTalentsFromSnapshot(documents: QuerySnapshot): ArrayList<PrettyFormattedTalent> {
+        val talents = ArrayList<PrettyFormattedTalent>()
+        val gson = Gson()
+
+        for (document in documents) {
+            val convertedJobObj = getTalentFromJson(gson.toJson(document.data), gson)
+
+            convertedJobObj?.let { talent ->
+                talents.add(
+                    PrettyFormattedTalent(
+                        id = document.id,
+                        field = getFieldById(talent.field),
+                        title = talent.title,
+                        descr = talent.descr,
+                        experience  =talent.exp,
+                        address = talent.address,
+                        phone = talent.phone,
+                        email = talent.email,
+
+                        price = if (talent.price == -1) {
+                            resUtil.getStringRes(R.string.txt_negociab)
+                        } else {
+                            getPretyFormattedPriceHour(talent.price)
+                        },
+                        time = getPrettyDateFromMilis(talent.time),
+                        seen = getPrettyPrintVal(talent.seen)
+                    )
+                )
+            }
+        }
+
+        return talents
+    }
+
+    fun getTalentDetailItems(prettyFormattedTalent: PrettyFormattedTalent): ArrayList<DetailsItem> {
+        val list = ArrayList<DetailsItem>()
+
+        list.add(DetailsItem(resUtil.getStringRes(R.string.txt_title), prettyFormattedTalent.title))
+        list.add(DetailsItem(resUtil.getStringRes(R.string.txt_field), prettyFormattedTalent.field))
+        list.add(DetailsItem(resUtil.getStringRes(R.string.txt_descr), prettyFormattedTalent.descr))
+        list.add(DetailsItem(resUtil.getStringRes(R.string.txt_exp), prettyFormattedTalent.experience))
+        list.add(DetailsItem(resUtil.getStringRes(R.string.txt_adres), prettyFormattedTalent.address))
+        list.add(DetailsItem(resUtil.getStringRes(R.string.txt_date), prettyFormattedTalent.time))
+        list.add(DetailsItem(resUtil.getStringRes(R.string.txt_price), prettyFormattedTalent.price))
+        list.add(
+            DetailsItem(
+                resUtil.getStringRes(R.string.txt_seen),
+                prettyFormattedTalent.seen.plus(" ").plus(resUtil.getStringRes(R.string.txt_talents))
+            )
+        )
+        list.add(DetailsItem(resUtil.getStringRes(R.string.txt_email), prettyFormattedTalent.email))
+        list.add(
+            DetailsItem(
+                resUtil.getStringRes(R.string.txt_phone_only),
+                prettyFormattedTalent.phone
+            )
+        )
+
+        return list
+    }
+
 
     fun getFieldById(id: Int): String {
         try {
@@ -182,6 +244,10 @@ class DataFormatter : KoinComponent {
 
     fun getPretyFormattedPrice(input: Int): String {
         return getPrettyPrintVal(input) + " MDL"
+    }
+
+    fun getPretyFormattedPriceHour(input: Int): String {
+        return getPrettyPrintVal(input) + " MDL/h"
     }
 
     fun getPrettyPrintVal(input: Int): String {

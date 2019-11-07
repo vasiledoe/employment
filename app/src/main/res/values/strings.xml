@@ -68,6 +68,7 @@
 
 
 	<string name="txt_job_det">Job details</string>
+	<string name="txt_talent_det">Talent details</string>
 	<string name="txt_field">Field</string>
 	<string name="txt_adres">Address</string>
 	<string name="txt_date">Creation date</string>

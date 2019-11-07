@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/whole_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_vertical_margin">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/custom_dim_8"
+        android:layout_marginEnd="@dimen/custom_dim_8"
+        android:layout_toStartOf="@+id/tv_time"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/primary"
+        android:textSize="@dimen/txt_medium_xs"
+        android:textStyle="bold"
+        tools:text="Senior Andorid developer" />
+
+    <TextView
+        android:id="@+id/tv_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/secondary_text"
+        android:textSize="@dimen/txt_small"
+        android:textStyle="bold"
+        tools:text="Computers and Technology" />
+
+    <TextView
+        android:id="@+id/tv_descr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/custom_dim_8"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textColor="@color/primary_text"
+        android:textSize="@dimen/txt_small"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/custom_dim_12">
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/txt_medium_xs"
+            android:textStyle="bold"
+            tools:text="550 Mdl/hour" />
+
+        <TextView
+            android:id="@+id/tv_seen_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:drawableStart="@drawable/ic_eye"
+            android:drawablePadding="@dimen/custom_dim_8"
+            android:drawableTint="@color/secondary_text"
+            android:gravity="center"
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/txt_small"
+            android:textStyle="bold"
+            tools:text="10" />
+
+    </RelativeLayout>
+
+</LinearLayout>

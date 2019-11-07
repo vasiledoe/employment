@@ -11,6 +11,7 @@ import base.view.CustomDialogs
 import base.view_model.FlavorViewModel
 import features.create_job.view.CreateJobFrg
 import features.details_job.view.DetailsFrg
+import features.details_talent.view.DetailsTalentFrg
 import features.list_talents.view.TalentsFrg
 import kotlinx.android.synthetic.main.activity_sample.*
 
@@ -66,6 +67,15 @@ class MainActivity : BaseMainActivity() {
             )
         })
 
+        mViewModel.talentDetails.observe(this, Observer {
+            switchFrgFromActivity(
+                DetailsTalentFrg.newInstance(it),
+                true,
+                R.id.container_for_fragments,
+                "DetailsTalentFrg"
+            )
+        })
+
         mViewModel.isJobPostedSuccess.observe(this, Observer {
             this.onBackPressed()
         })
@@ -96,7 +106,6 @@ class MainActivity : BaseMainActivity() {
 
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        logs.LOG("MainActivity", "onNavigationItemSelected", "...")
         Handler().postDelayed({
             when (item.itemId) {
                 R.id.nav_home -> {

@@ -1,7 +1,5 @@
-package features.details_job.view
+package features.details_talent.view
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,34 +8,35 @@ import android.widget.Button
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import base.model.PrettyFormattedJob
+import base.model.PrettyFormattedTalent
 import base.view.BaseFrg
 import base.view_model.FlavorViewModel
 import com.bitplanet.employment.R
+import features.details_job.view.DetailsItemsAdapter
 import kotlinx.android.synthetic.main.frg_details.*
 
-class DetailsFrg : BaseFrg() {
+class DetailsTalentFrg : BaseFrg() {
 
     companion object {
-        private val KEY_JOB_OBJ_PARCEL = "KEY_JOB_OBJ_PARCEL"
+        private val KEY_TALENT_OBJ_PARCEL = "KEY_TALENT_OBJ_PARCEL"
 
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param prettyFormattedJob as PrettyFormattedJob.
+         * @param prettyFormattedTalent as PrettyFormattedTalent.
          * @return A new instance of fragment DetailsFrg.
          */
-        fun newInstance(prettyFormattedJob: PrettyFormattedJob): DetailsFrg {
-            val fragment = DetailsFrg()
+        fun newInstance(prettyFormattedTalent: PrettyFormattedTalent): DetailsTalentFrg {
+            val fragment = DetailsTalentFrg()
             val args = Bundle()
-            args.putParcelable(KEY_JOB_OBJ_PARCEL, prettyFormattedJob)
+            args.putParcelable(KEY_TALENT_OBJ_PARCEL, prettyFormattedTalent)
             fragment.arguments = args
             return fragment
         }
     }
 
-    private var prettyFormattedJob: PrettyFormattedJob? = null
+    private var prettyFormattedTalent: PrettyFormattedTalent? = null
 
     private lateinit var mViewModel: FlavorViewModel
 
@@ -45,7 +44,7 @@ class DetailsFrg : BaseFrg() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            prettyFormattedJob = it.getParcelable(KEY_JOB_OBJ_PARCEL)
+            prettyFormattedTalent = it.getParcelable(KEY_TALENT_OBJ_PARCEL)
         }
     }
 
@@ -72,7 +71,7 @@ class DetailsFrg : BaseFrg() {
     override fun onResume() {
         super.onResume()
 
-        mViewModel.setToolbarTitle(resUtil.getStringRes(R.string.txt_job_det))
+        mViewModel.setToolbarTitle(resUtil.getStringRes(R.string.txt_talent_det))
     }
 
 
@@ -85,16 +84,16 @@ class DetailsFrg : BaseFrg() {
 
     private fun setupViews(view: View) {
         val btnCall: Button = view.findViewById(R.id.btn_call)
-        btnCall.setOnClickListener { openCall() }
+        btnCall.setOnClickListener { openCall(prettyFormattedTalent?.phone) }
         val btnEmail: Button = view.findViewById(R.id.btn_email)
-        btnEmail.setOnClickListener { openEmail() }
+        btnEmail.setOnClickListener { openEmail(prettyFormattedTalent?.email) }
     }
 
     private fun loadViews() {
-        prettyFormattedJob?.let {
+        prettyFormattedTalent?.let {
             rv_itms.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             rv_itms.adapter = DetailsItemsAdapter(
-                items = formatter.getJobDetailItems(it)
+                items = formatter.getTalentDetailItems(it)
             )
 
             it.phone?.let {
@@ -102,35 +101,6 @@ class DetailsFrg : BaseFrg() {
             }
 
             mViewModel.doIncrementSeenCoounter(it.id)
-        }
-    }
-
-    private fun openEmail() {
-        val email = prettyFormattedJob?.email
-
-        try {
-            val emailIntent = Intent(
-                Intent.ACTION_SENDTO,
-                Uri.fromParts("mailto", email, null)
-            )
-
-            startActivity(emailIntent)
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun openCall() {
-        val phone = prettyFormattedJob?.phone
-
-        try {
-            val callIntent = Intent(Intent.ACTION_VIEW)
-            callIntent.setData(Uri.parse("tel:" + phone))
-            startActivity(callIntent)
-
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
     }
 }

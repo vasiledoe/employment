@@ -3,18 +3,24 @@ package base.view_model
 import android.util.Patterns
 import androidx.lifecycle.MutableLiveData
 import base.model.Job
+import base.model.PrettyFormattedTalent
 import com.bitplanet.employment.R
 import features.create_job.model.CreateJobRepo
 import features.details_job.model.DetailsJobRepo
+import features.details_talent.model.DetailsTalentRepo
+import features.list_talents.model.TalentsRepo
 import org.koin.core.inject
 
 class FlavorViewModel : BaseViewModel() {
 
     val isJobPostedSuccess = MutableLiveData<Boolean>()
     val isJobDeletedSuccess = MutableLiveData<Boolean>()
+    val talents = MutableLiveData<ArrayList<PrettyFormattedTalent>>()
 
     private val createJobRepo: CreateJobRepo by inject()
     private val detailsJobRepo: DetailsJobRepo by inject()
+    private val detailsTalentRepo: DetailsTalentRepo by inject()
+    private val listTalentsRepo: TalentsRepo by inject()
 
 
     fun isJobDataInserted(job: Job): Boolean {
@@ -99,6 +105,30 @@ class FlavorViewModel : BaseViewModel() {
                 isProgressLoading.value = false
                 error.value = err ?: getDefErr()
             })
+    }
+
+    fun getTalents(fiedId: Int) {
+        isProgressLoading.value = true
+
+        listTalentsRepo.getTalents(
+            fieldId = fiedId,
+            receivedTalensListener = { receivedTalents ->
+                isProgressLoading.value = false
+                talents.value = receivedTalents
+            },
+            noItemsListener = {
+                isProgressLoading.value = false
+                talents.value = null
+            },
+            errListener = { err ->
+                isProgressLoading.value = false
+                error.value = err ?: getDefErr()
+            })
+    }
+
+
+    fun doIncrementSeenCoounter(docId: String?) {
+        detailsTalentRepo.incrementSeenCounter(docId)
     }
 
 }

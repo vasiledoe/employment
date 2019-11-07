@@ -1,5 +1,7 @@
 package base.view
 
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
@@ -16,7 +18,11 @@ open class BaseFrg : Fragment() {
     protected val formatter: DataFormatter by inject()
 
 
-    protected fun handleItmsVisibility(rvItms: RecyclerView, zoneNoItms: LinearLayout, status: Int) {
+    protected fun handleItmsVisibility(
+        rvItms: RecyclerView,
+        zoneNoItms: LinearLayout,
+        status: Int
+    ) {
         when (status) {
             LOADING -> {
                 rvItms.visibility = View.GONE
@@ -41,4 +47,32 @@ open class BaseFrg : Fragment() {
         val HAS_ITEMS = 2
     }
 
+    protected fun openEmail(email: String?) {
+        email?.let {
+            try {
+                val emailIntent = Intent(
+                    Intent.ACTION_SENDTO,
+                    Uri.fromParts("mailto", email, null)
+                )
+
+                startActivity(emailIntent)
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    protected fun openCall(phone: String?) {
+        phone?.let {
+            try {
+                val callIntent = Intent(Intent.ACTION_VIEW)
+                callIntent.setData(Uri.parse("tel:" + phone))
+                startActivity(callIntent)
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
 }

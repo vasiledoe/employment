@@ -5,7 +5,9 @@ import base.baseModule
 import features.auth.authModule
 import features.create_job.createJobModule
 import features.details_job.detailsJobModule
+import features.details_talent.detailsTalentModule
 import features.list_jobs.listJobsModule
+import features.list_talents.listTalentsModule
 import features.splash.splashModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -26,7 +28,11 @@ class App : Application() {
             androidContext(this@App)
 
             // modules
-            modules(authModule + splashModule + utilsModule + createJobModule + detailsJobModule + baseModule + listJobsModule)
+            modules(
+                authModule + splashModule + utilsModule + createJobModule +
+                        detailsJobModule + baseModule + listTalentsModule + detailsTalentModule +
+                        listJobsModule
+            )
         }
     }
 }
