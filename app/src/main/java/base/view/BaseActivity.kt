@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import base.model.DefConstants
 import com.bitplanet.employment.R
 import com.google.android.material.snackbar.Snackbar
@@ -67,6 +68,9 @@ open class BaseActivity : AppCompatActivity() {
         //add frg to system backstack
         if (isAddedToBackStack) {
             fragmentTransaction.addToBackStack(frgTag)
+
+        }else{
+            supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
 
         fragmentTransaction.commitAllowingStateLoss()
