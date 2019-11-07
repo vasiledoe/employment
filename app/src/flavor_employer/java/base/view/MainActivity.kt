@@ -35,6 +35,7 @@ class MainActivity : BaseMainActivity() {
     private fun fillUpInitialData() {
         mViewModel.showLoggeUserEmail()
         onNavigationItemSelected(mNavigationView.menu.findItem(R.id.nav_home))
+        mNavigationView.menu.getItem(0).isChecked = true
     }
 
     private fun onBindModel() {

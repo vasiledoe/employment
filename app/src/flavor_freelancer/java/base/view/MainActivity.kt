@@ -32,6 +32,7 @@ class MainActivity : BaseMainActivity() {
     private fun fillUpInitialData() {
         mViewModel.showLoggeUserEmail()
         onNavigationItemSelected(mNavigationView.menu.findItem(R.id.nav_home))
+        mNavigationView.menu.getItem(0).isChecked = true
     }
 
     private fun onBindModel() {
@@ -50,7 +51,8 @@ class MainActivity : BaseMainActivity() {
         })
 
         mViewModel.isTalentEditedSuccess.observe(this, Observer {
-            this.onBackPressed()
+            onNavigationItemSelected(mNavigationView.menu.findItem(R.id.nav_home))
+            mNavigationView.menu.getItem(0).isChecked = true
         })
 
         mViewModel.jobDetails.observe(this, Observer {
