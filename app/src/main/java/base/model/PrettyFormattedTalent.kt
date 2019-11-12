@@ -7,7 +7,7 @@ import android.os.Parcelable
  * used for ready to show data beans in adapter
  */
 data class PrettyFormattedTalent(
-    val id:String?,
+    val id: String?,
     var field: String?,
     var title: String?,
     var descr: String?,
@@ -18,7 +18,7 @@ data class PrettyFormattedTalent(
     var email: String?,
     var time: String?,
     var seen: String?
-): Parcelable {
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),

@@ -15,7 +15,7 @@ import utils.DataFormatter
 
 class TalentsAdapter(
     private val items: ArrayList<PrettyFormattedTalent>,
-    private val clieckedItmListener: (PrettyFormattedTalent) -> Unit
+    private val clickedItmListener: (PrettyFormattedTalent) -> Unit
 ) : RecyclerView.Adapter<TalentsAdapter.ViewHolder>(), KoinComponent {
 
     private val dataFormatter: DataFormatter by inject()
@@ -36,7 +36,7 @@ class TalentsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val talent = items.get(position)
+        val talent = items[position]
 
         holder.tvTitle.text = talent.title
         holder.tvField.text = talent.field
@@ -44,7 +44,7 @@ class TalentsAdapter(
         holder.tvPrice.text = talent.price
         holder.tvSeen.text = talent.seen
 
-        holder.wholeZone.setOnClickListener { clieckedItmListener(talent) }
+        holder.wholeZone.setOnClickListener { clickedItmListener(talent) }
 
         if (position % 2 == 1) {
             holder.wholeZone.setBackgroundColor(dataFormatter.resUtil.getColorRes(R.color.divider_30))

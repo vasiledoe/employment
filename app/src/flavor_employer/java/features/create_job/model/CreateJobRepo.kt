@@ -13,12 +13,16 @@ class CreateJobRepo : MainRepo() {
     }
 
 
-    fun insertJob(job: Job, successListener: () -> Unit, errListener: (err: String?) -> Unit) {
+    fun insertJob(
+        job: Job,
+        successListener: () -> Unit,
+        errListener: (err: String?) -> Unit
+    ) {
         val jobMap = hashMapOf(
             JobUtil.KEY_FIELD to job.field,
             JobUtil.KEY_TITLE to job.title,
             JobUtil.KEY_DESCR to job.descr,
-            JobUtil.KEY_ADRESS to job.address,
+            JobUtil.KEY_ADDRESS to job.address,
             JobUtil.KEY_PHONE to job.phone,
             JobUtil.KEY_PRICE to job.price,
             JobUtil.KEY_TIME to System.currentTimeMillis(),
@@ -31,6 +35,6 @@ class CreateJobRepo : MainRepo() {
             .document()
             .set(jobMap)
             .addOnSuccessListener { successListener() }
-            .addOnFailureListener { e -> errListener(e.message ) }
+            .addOnFailureListener { e -> errListener(e.message) }
     }
 }

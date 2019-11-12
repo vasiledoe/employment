@@ -5,13 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import base.view.BaseSpinnerAdapter
 import com.bitplanet.employment.R
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import utils.ResUtil
 
-class FieldsSpinnerAdapter(private val mData: Array<String>) : BaseSpinnerAdapter(), KoinComponent {
+class FieldsSpinnerAdapter(private val mData: Array<String>) :
+    BaseSpinnerAdapter(), KoinComponent {
 
     private var mSelectedPos: Int = 0
 
@@ -23,7 +23,7 @@ class FieldsSpinnerAdapter(private val mData: Array<String>) : BaseSpinnerAdapte
     }
 
     override fun getItem(position: Int): String {
-        return mData.get(position)
+        return mData[position]
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
@@ -39,17 +39,20 @@ class FieldsSpinnerAdapter(private val mData: Array<String>) : BaseSpinnerAdapte
     }
 
 
-    private fun getDoneSetup(position: Int, v: View?, viewGroup: ViewGroup?, isDropDownItem: Boolean): View? {
+    private fun getDoneSetup(
+        position: Int, v: View?,
+        viewGroup: ViewGroup?, isDropDownItem: Boolean
+    ): View? {
         var view = v
         if (view == null)
-            view = LayoutInflater.from(viewGroup?.context).inflate(R.layout.custom_spinner_itm, viewGroup, false)
+            view = LayoutInflater.from(viewGroup?.context)
+                .inflate(R.layout.custom_spinner_itm, viewGroup, false)
 
         val rlWholeItem = view?.findViewById<LinearLayout>(R.id.whole_zone)
         val tvText = view?.findViewById<TextView>(R.id.tv_text)
 
         val curText = mData[position]
         tvText?.text = curText
-        //        view.setPadding(16, 0, 0, 0);
 
         if (isDropDownItem) {
             if (position == mSelectedPos) {

@@ -44,7 +44,7 @@ class FlavorViewModel : BaseViewModel() {
             return false
         }
 
-        if (!job.phone.isEmpty()) {
+        if (job.phone.isNotEmpty()) {
             if (!Patterns.PHONE.matcher(job.phone).matches()) {
                 error.value = resUtil.getStringRes(R.string.txt_phone_warn)
                 return false

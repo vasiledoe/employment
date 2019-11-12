@@ -25,7 +25,7 @@ open class BaseViewModel : ViewModel(), KoinComponent {
 
 
     protected val resUtil: ResUtil by inject()
-    protected val mainRepo: MainRepo by inject()
+    private val mainRepo: MainRepo by inject()
     protected val listJobsRepo: ListJobsRepo by inject()
 
 

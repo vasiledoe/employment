@@ -1,7 +1,5 @@
 package features.edit_talent_account.model
 
-import android.util.Log
-import base.model.JobUtil
 import base.model.MainRepo
 import base.model.Talent
 import base.model.TalentUtil

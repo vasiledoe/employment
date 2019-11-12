@@ -97,10 +97,15 @@ class TalentsFrg : BaseFrg() {
             if (talents.size > 0) {
                 handleItmsVisibility(rv_itms, zone_no_items, HAS_ITEMS)
 
-                rv_itms.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+                rv_itms.layoutManager = LinearLayoutManager(
+                    activity,
+                    RecyclerView.VERTICAL,
+                    false
+                )
+
                 rv_itms.adapter = TalentsAdapter(
                     items = talents,
-                    clieckedItmListener = { mViewModel.goToTalentDetails(it) }
+                    clickedItmListener = { mViewModel.goToTalentDetails(it) }
                 )
 
             } else {

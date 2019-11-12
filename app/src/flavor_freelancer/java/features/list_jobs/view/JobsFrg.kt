@@ -97,10 +97,15 @@ class JobsFrg : BaseFrg() {
             if (jobs.size > 0) {
                 handleItmsVisibility(rv_itms, zone_no_items, HAS_ITEMS)
 
-                rv_itms.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+                rv_itms.layoutManager = LinearLayoutManager(
+                    activity,
+                    RecyclerView.VERTICAL,
+                    false
+                )
+
                 rv_itms.adapter = JobsAdapter(
                     items = jobs,
-                    clieckedItmListener = { mViewModel.goToJobDetails(it) }
+                    clickedItmListener = { mViewModel.goToJobDetails(it) }
                 )
 
             } else {

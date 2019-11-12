@@ -22,9 +22,10 @@ class RecoveryFrg : BaseFrg(), View.OnClickListener {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view: View = inflater.inflate(R.layout.frg_recovery, container, false)
 
         setupViews(view)
@@ -48,7 +49,7 @@ class RecoveryFrg : BaseFrg(), View.OnClickListener {
         if (mViewModel.isRecoveryDataInserted(email = et_email.text.toString())) {
 
             mViewModel.doRecovery(
-                    email = et_email.text.toString()
+                email = et_email.text.toString()
             )
         }
     }

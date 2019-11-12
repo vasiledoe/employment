@@ -64,7 +64,7 @@ class DataFormatter : KoinComponent {
         return jobs
     }
 
-    fun getJobFromJson(json: String, gson: Gson): Job? {
+    private fun getJobFromJson(json: String, gson: Gson): Job? {
         try {
             return gson.fromJson(json, Job::class.java)
 
@@ -87,7 +87,9 @@ class DataFormatter : KoinComponent {
         list.add(
             DetailsItem(
                 resUtil.getStringRes(R.string.txt_seen),
-                prettyFormattedJob.seen.plus(" ").plus(resUtil.getStringRes(R.string.txt_talents))
+                prettyFormattedJob.seen
+                    .plus(" ")
+                    .plus(resUtil.getStringRes(R.string.txt_talents))
             )
         )
         list.add(DetailsItem(resUtil.getStringRes(R.string.txt_email), prettyFormattedJob.email))
@@ -106,13 +108,13 @@ class DataFormatter : KoinComponent {
         val gson = Gson()
 
         document?.let { snapshot ->
-          return getTalentFromJson(gson.toJson(snapshot.data), gson)
+            return getTalentFromJson(gson.toJson(snapshot.data), gson)
         }
 
         return null
     }
 
-    fun getTalentFromJson(json: String, gson: Gson): Talent? {
+    private fun getTalentFromJson(json: String, gson: Gson): Talent? {
         try {
             return gson.fromJson(json, Talent::class.java)
 
@@ -137,7 +139,7 @@ class DataFormatter : KoinComponent {
                         field = getFieldById(talent.field),
                         title = talent.title,
                         descr = talent.descr,
-                        experience  =talent.exp,
+                        experience = talent.exp,
                         address = talent.address,
                         phone = talent.phone,
                         email = talent.email,
@@ -163,14 +165,26 @@ class DataFormatter : KoinComponent {
         list.add(DetailsItem(resUtil.getStringRes(R.string.txt_title), prettyFormattedTalent.title))
         list.add(DetailsItem(resUtil.getStringRes(R.string.txt_field), prettyFormattedTalent.field))
         list.add(DetailsItem(resUtil.getStringRes(R.string.txt_descr), prettyFormattedTalent.descr))
-        list.add(DetailsItem(resUtil.getStringRes(R.string.txt_exp), prettyFormattedTalent.experience))
-        list.add(DetailsItem(resUtil.getStringRes(R.string.txt_adres), prettyFormattedTalent.address))
+        list.add(
+            DetailsItem(
+                resUtil.getStringRes(R.string.txt_exp),
+                prettyFormattedTalent.experience
+            )
+        )
+        list.add(
+            DetailsItem(
+                resUtil.getStringRes(R.string.txt_adres),
+                prettyFormattedTalent.address
+            )
+        )
         list.add(DetailsItem(resUtil.getStringRes(R.string.txt_date), prettyFormattedTalent.time))
         list.add(DetailsItem(resUtil.getStringRes(R.string.txt_price), prettyFormattedTalent.price))
         list.add(
             DetailsItem(
                 resUtil.getStringRes(R.string.txt_seen),
-                prettyFormattedTalent.seen.plus(" ").plus(resUtil.getStringRes(R.string.txt_talents))
+                prettyFormattedTalent.seen
+                    .plus(" ")
+                    .plus(resUtil.getStringRes(R.string.txt_talents))
             )
         )
         list.add(DetailsItem(resUtil.getStringRes(R.string.txt_email), prettyFormattedTalent.email))
@@ -185,7 +199,7 @@ class DataFormatter : KoinComponent {
     }
 
 
-    fun getFieldById(id: Int): String {
+    private fun getFieldById(id: Int): String {
         try {
             return resUtil.getStringArrayRes(R.array.fields)[id]
 
@@ -196,7 +210,7 @@ class DataFormatter : KoinComponent {
         return resUtil.getStringRes(R.string.txt_unknown)
     }
 
-    fun getPrettyDateFromMilis(neededTimeMilis: Long): String {
+    private fun getPrettyDateFromMilis(neededTimeMilis: Long): String {
         val nowTime = Calendar.getInstance()
         val neededTime = Calendar.getInstance()
         neededTime.timeInMillis = neededTimeMilis
@@ -205,52 +219,50 @@ class DataFormatter : KoinComponent {
 
             if (neededTime.get(Calendar.MONTH) == nowTime.get(Calendar.MONTH)) {
 
-                if (neededTime.get(Calendar.DATE) - nowTime.get(Calendar.DATE) == 1) {
-                    //here return like "Tomorrow at 12:00"
-                    resUtil.getStringRes(R.string.txt_tomorrow) + " " + DateFormat.format(
-                        "HH:mm",
-                        neededTime
-                    )
-
-                } else if (nowTime.get(Calendar.DATE) == neededTime.get(Calendar.DATE)) {
-                    //here return like "Today at 12:00"
-                    resUtil.getStringRes(R.string.txt_today) + " " + DateFormat.format(
-                        "HH:mm",
-                        neededTime
-                    )
-
-                } else if (nowTime.get(Calendar.DATE) - neededTime.get(Calendar.DATE) == 1) {
-                    //here return like "Yesterday at 12:00"
-                    resUtil.getStringRes(R.string.txt_ysterday) + " " + DateFormat.format(
-                        "HH:mm",
-                        neededTime
-                    )
-
-                } else {
-                    //here return like "May 31, 12:00"
-                    DateFormat.format("MMMM d, HH:mm", neededTime).toString()
+                when {
+                    neededTime.get(Calendar.DATE) - nowTime.get(Calendar.DATE) == 1 ->
+                        //"Tomorrow at 12:00"
+                        resUtil.getStringRes(R.string.txt_tomorrow) + " " + DateFormat.format(
+                            "HH:mm",
+                            neededTime
+                        )
+                    nowTime.get(Calendar.DATE) == neededTime.get(Calendar.DATE) ->
+                        //"Today at 12:00"
+                        resUtil.getStringRes(R.string.txt_today) + " " + DateFormat.format(
+                            "HH:mm",
+                            neededTime
+                        )
+                    nowTime.get(Calendar.DATE) - neededTime.get(Calendar.DATE) == 1 ->
+                        //"Yesterday at 12:00"
+                        resUtil.getStringRes(R.string.txt_ysterday) + " " + DateFormat.format(
+                            "HH:mm",
+                            neededTime
+                        )
+                    else ->
+                        //"May 31, 12:00"
+                        DateFormat.format("MMMM d, HH:mm", neededTime).toString()
                 }
 
             } else {
-                //here return like "May 31, 12:00"
+                //"May 31, 12:00"
                 DateFormat.format("MMMM d, HH:mm", neededTime).toString()
             }
 
         } else {
-            //here return like "May 31 2010, 12:00" - it's a different year we need to show it
+            //"May 31 2010, 12:00" - it's a different year we need to show it
             DateFormat.format("MMMM dd yyyy, HH:mm", neededTime).toString()
         }
     }
 
-    fun getPretyFormattedPrice(input: Int): String {
+    private fun getPretyFormattedPrice(input: Int): String {
         return getPrettyPrintVal(input) + " MDL"
     }
 
-    fun getPretyFormattedPriceHour(input: Int): String {
+    private fun getPretyFormattedPriceHour(input: Int): String {
         return getPrettyPrintVal(input) + " MDL/h"
     }
 
-    fun getPrettyPrintVal(input: Int): String {
+    private fun getPrettyPrintVal(input: Int): String {
         val decimalFormat =
             DecimalFormat("###,##0", DecimalFormatSymbols.getInstance(Locale.GERMANY))
         return decimalFormat.format(input)

@@ -10,7 +10,11 @@ class DetailsJobRepo : MainRepo() {
         FirebaseFirestore.getInstance()
     }
 
-    fun deleteJob(id: String, successListener: () -> Unit, errListener: (err: String?) -> Unit) {
+    fun deleteJob(
+        id: String,
+        successListener: () -> Unit,
+        errListener: (err: String?) -> Unit
+    ) {
         dbInstance.collection(JobUtil.KEY_JOBS)
             .document(id)
             .delete()

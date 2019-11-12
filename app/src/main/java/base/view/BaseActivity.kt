@@ -24,7 +24,7 @@ import utils.ResUtil
 
 open class BaseActivity : AppCompatActivity() {
 
-    val logs: MyLogs by inject()
+    protected val logs: MyLogs by inject()
     protected val resUtil: ResUtil by inject()
 
 
@@ -69,14 +69,17 @@ open class BaseActivity : AppCompatActivity() {
         if (isAddedToBackStack) {
             fragmentTransaction.addToBackStack(frgTag)
 
-        }else{
-            supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        } else {
+            supportFragmentManager.popBackStack(
+                null,
+                FragmentManager.POP_BACK_STACK_INCLUSIVE
+            )
         }
 
         fragmentTransaction.commitAllowingStateLoss()
     }
 
-    fun contactUs() {
+    protected fun contactUs() {
         try {
             val emailIntent = Intent(
                 Intent.ACTION_SENDTO,
@@ -93,15 +96,19 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    fun shareAppContent() {
+    protected fun shareAppContent() {
         try {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "text/plain"
 
-            intent.putExtra(Intent.EXTRA_SUBJECT, resUtil.getStringRes(R.string.share_subject_txt))
+            intent.putExtra(
+                Intent.EXTRA_SUBJECT,
+                resUtil.getStringRes(R.string.share_subject_txt)
+            )
             intent.putExtra(
                 Intent.EXTRA_TEXT,
-                resUtil.getStringRes(R.string.share_message_body) + " at https://play.google.com/store/apps/details?id=" + packageName
+                resUtil.getStringRes(R.string.share_message_body) +
+                        " at https://play.google.com/store/apps/details?id=" + packageName
             )
             startActivity(intent)
 
@@ -111,7 +118,7 @@ open class BaseActivity : AppCompatActivity() {
 
     }
 
-    fun doSignOut() {
+    protected fun doSignOut() {
         CustomDialogs().showSimpleDialog(
             activityCtx = this,
             title = resUtil.getStringRes(R.string.txt_caution),
@@ -125,7 +132,7 @@ open class BaseActivity : AppCompatActivity() {
         )
     }
 
-    fun openDesiredFrg(whereToGo: Int) {
+    protected fun openDesiredFrg(whereToGo: Int) {
         when (whereToGo) {
             REGISTER -> switchFrgFromActivity(
                 RegisterFrg(),
@@ -166,16 +173,16 @@ open class BaseActivity : AppCompatActivity() {
 
 
     companion object {
-        val AUTH_EXTRA = "AUTH_EXTRA"
-        val LOGIN = 1
-        val REGISTER = 2
-        val RECOVERY = 3
+        const val AUTH_EXTRA = "AUTH_EXTRA"
+        const val LOGIN = 1
+        const val REGISTER = 2
+        const val RECOVERY = 3
 
-        val CREATE_JOB_FRG = 4
-        val EDIT_TALENT_FRG = 5
-        val JOBS_FRG = 6
-        val TALENTS_FRG = 7
-        val TALENTS_details_FRG = 8
-        val SETTINGS_FRG = 9
+        const val CREATE_JOB_FRG = 4
+        const val EDIT_TALENT_FRG = 5
+        const val JOBS_FRG = 6
+        const val TALENTS_FRG = 7
+        const val TALENTS_details_FRG = 8
+        const val SETTINGS_FRG = 9
     }
 }

@@ -24,9 +24,10 @@ class LoginFrg : BaseFrg(), View.OnClickListener {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view: View = inflater.inflate(R.layout.frg_login, container, false)
 
         setupViews(view)
@@ -54,12 +55,14 @@ class LoginFrg : BaseFrg(), View.OnClickListener {
 
     private fun tryLogin() {
         if (mViewModel.isLoginDataInserted(
-                        email = et_email.text.toString(),
-                        pass = et_pass.text.toString())) {
+                email = et_email.text.toString(),
+                pass = et_pass.text.toString()
+            )
+        ) {
 
             mViewModel.doLogin(
-                    email = et_email.text.toString(),
-                    pass = et_pass.text.toString()
+                email = et_email.text.toString(),
+                pass = et_pass.text.toString()
             )
         }
     }

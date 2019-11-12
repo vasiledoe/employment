@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import base.view.BaseActivity
 import base.view.CustomDialogs
-import com.bitplanet.employment.MainActivity
+import base.view.DrawerActivity
 import com.bitplanet.employment.R
 import features.auth.viewmodel.AuthViewModel
 import kotlinx.android.synthetic.main.activity_sample.*
@@ -47,9 +47,9 @@ class AuthActivity : BaseActivity() {
     private fun onBindModel() {
         mViewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
 
-               mViewModel.isLogged.observe(this, Observer {
+        mViewModel.isLogged.observe(this, Observer {
             hideLoading(progress_bar)
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, DrawerActivity::class.java))
             finish()
         })
 
@@ -75,9 +75,9 @@ class AuthActivity : BaseActivity() {
             hideLoading(viewLoading = progress_bar)
 
             CustomDialogs().showSimpleDialog(
-                    activityCtx = this,
-                    title = resUtil.getStringRes(R.string.txt_error),
-                    msg = it
+                activityCtx = this,
+                title = resUtil.getStringRes(R.string.txt_error),
+                msg = it
             )
         })
     }

@@ -34,7 +34,7 @@ class DetailsItemsAdapter(private val items: ArrayList<DetailsItem>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val job = items.get(position)
+        val job = items[position]
 
         holder.tvTitle.text = job.title
         holder.tvDetails.text = job.details

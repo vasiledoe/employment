@@ -22,9 +22,10 @@ class RegisterFrg : BaseFrg(), View.OnClickListener {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view: View = inflater.inflate(R.layout.frg_register, container, false)
 
         setupViews(view)
@@ -46,13 +47,15 @@ class RegisterFrg : BaseFrg(), View.OnClickListener {
 
     private fun tryRegister() {
         if (mViewModel.isRegDataInserted(
-                        email = et_email.text.toString(),
-                        pass = et_pass.text.toString(),
-                        passRepeat = et_pass_retype.text.toString())) {
+                email = et_email.text.toString(),
+                pass = et_pass.text.toString(),
+                passRepeat = et_pass_retype.text.toString()
+            )
+        ) {
 
             mViewModel.doCreateAccount(
-                    email = et_email.text.toString(),
-                    pass = et_pass.text.toString()
+                email = et_email.text.toString(),
+                pass = et_pass.text.toString()
             )
         }
     }

@@ -5,13 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bitplanet.employment.R
 import features.auth.model.AuthRepo
-import features.auth.model.OnAuthListener
-import features.auth.model.OnRecoveryPassListener
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import utils.ResUtil
 
-class AuthViewModel : ViewModel(), OnAuthListener, OnRecoveryPassListener, KoinComponent {
+class AuthViewModel : ViewModel(), KoinComponent {
 
     val isLogged = MutableLiveData<Boolean>()
     val isRecoverySent = MutableLiveData<Boolean>()
@@ -25,7 +23,11 @@ class AuthViewModel : ViewModel(), OnAuthListener, OnRecoveryPassListener, KoinC
     private val resUtil: ResUtil by inject()
 
 
-    fun isRegDataInserted(email: String, pass: String, passRepeat: String): Boolean {
+    fun isRegDataInserted(
+        email: String,
+        pass: String,
+        passRepeat: String
+    ): Boolean {
         if (email.isEmpty()) {
             error.value = resUtil.getStringRes(R.string.add_warn_email_empty)
             return false
@@ -37,13 +39,13 @@ class AuthViewModel : ViewModel(), OnAuthListener, OnRecoveryPassListener, KoinC
         }
 
         if (pass.replace("\\s+", "").length < 6 ||
-                passRepeat.replace("\\s+", "").length < 6
+            passRepeat.replace("\\s+", "").length < 6
         ) {
             error.value = resUtil.getStringRes(R.string.add_warn_pass_empty)
             return false
         }
 
-        if (!pass.equals(passRepeat)) {
+        if (pass != passRepeat) {
             error.value = resUtil.getStringRes(R.string.add_warn_pass_retype)
             return false
         }
@@ -51,7 +53,10 @@ class AuthViewModel : ViewModel(), OnAuthListener, OnRecoveryPassListener, KoinC
         return true
     }
 
-    fun isLoginDataInserted(email: String, pass: String): Boolean {
+    fun isLoginDataInserted(
+        email: String,
+        pass: String
+    ): Boolean {
         if (email.isEmpty()) {
             error.value = resUtil.getStringRes(R.string.add_warn_email_empty)
             return false
@@ -85,13 +90,17 @@ class AuthViewModel : ViewModel(), OnAuthListener, OnRecoveryPassListener, KoinC
     }
 
 
-    fun doCreateAccount(email: String, pass: String) {
+    fun doCreateAccount(
+        email: String,
+        pass: String
+    ) {
         isProgressLoading.value = true
 
         authRepo.createAccount(
-                email = email,
-                password = pass,
-                listener = this@AuthViewModel
+            email = email,
+            password = pass,
+            successListener = { isLogged.value = true },
+            errListener = { err -> error.value = err }
         )
     }
 
@@ -99,9 +108,10 @@ class AuthViewModel : ViewModel(), OnAuthListener, OnRecoveryPassListener, KoinC
         isProgressLoading.value = true
 
         authRepo.signIn(
-                email = email,
-                password = pass,
-                listener = this@AuthViewModel
+            email = email,
+            password = pass,
+            successListener = { isLogged.value = true },
+            errListener = { err -> error.value = err }
         )
     }
 
@@ -109,25 +119,13 @@ class AuthViewModel : ViewModel(), OnAuthListener, OnRecoveryPassListener, KoinC
         isProgressLoading.value = true
 
         authRepo.recoveryPass(
-                email = email,
-                listener = this@AuthViewModel
+            email = email,
+            successListener = { isRecoverySent.value = true },
+            errListener = { err -> error.value = err }
         )
     }
 
     fun goToFrg(extraId: Int) {
         goToFrgId.value = extraId
-    }
-
-
-    override fun onAuthSuccess() {
-        isLogged.value = true
-    }
-
-    override fun onRecoverySuccess() {
-        isRecoverySent.value = true
-    }
-
-    override fun onErrDb(err: String?) {
-        error.value = err
     }
 }

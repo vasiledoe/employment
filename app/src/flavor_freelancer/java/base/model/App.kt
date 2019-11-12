@@ -26,7 +26,10 @@ class App : Application() {
             androidContext(this@App)
 
             // modules
-            modules(authModule + splashModule + utilsModule + listJobsModule + detailsJobModule + editTalentModule + baseModule)
+            modules(
+                authModule + splashModule + utilsModule + listJobsModule +
+                        detailsJobModule + editTalentModule + baseModule
+            )
         }
     }
 }

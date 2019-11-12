@@ -3,18 +3,18 @@ package base.model
 class JobUtil {
 
     companion object {
-        val KEY_JOBS = "jobs"
+        const val KEY_JOBS = "jobs"
 
-        val KEY_FIELD = "field"
-        val KEY_TITLE = "title"
-        val KEY_DESCR = "descr"
-        val KEY_ADRESS = "address"
-        val KEY_PRICE = "price"
-        val KEY_TIME = "time"
-        val KEY_UID = "uid"
-        val KEY_EMAIL = "email"
-        val KEY_PHONE = "phone"
-        val KEY_SEEN = "seen"
+        const val KEY_FIELD = "field"
+        const val KEY_TITLE = "title"
+        const val KEY_DESCR = "descr"
+        const val KEY_ADDRESS = "address"
+        const val KEY_PRICE = "price"
+        const val KEY_TIME = "time"
+        const val KEY_UID = "uid"
+        const val KEY_EMAIL = "email"
+        const val KEY_PHONE = "phone"
+        const val KEY_SEEN = "seen"
     }
 
 }

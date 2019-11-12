@@ -1,4 +1,4 @@
-package com.bitplanet.employment
+package base.view
 
 import android.os.Bundle
 import android.os.Handler
@@ -6,16 +6,15 @@ import android.view.MenuItem
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import base.view.BaseMainActivity
-import base.view.CustomDialogs
 import base.view_model.FlavorViewModel
+import com.bitplanet.employment.R
 import features.create_job.view.CreateJobFrg
 import features.details_job.view.DetailsFrg
 import features.details_talent.view.DetailsTalentFrg
 import features.list_talents.view.TalentsFrg
 import kotlinx.android.synthetic.main.activity_sample.*
 
-class MainActivity : BaseMainActivity() {
+class DrawerActivity : BaseDrawerActivity() {
 
     private lateinit var mViewModel: FlavorViewModel
 
@@ -106,9 +105,9 @@ class MainActivity : BaseMainActivity() {
     }
 
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+    override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         Handler().postDelayed({
-            when (item.itemId) {
+            when (p0.itemId) {
                 R.id.nav_home -> {
                     openDesiredFrg(JOBS_FRG)
                 }
@@ -136,7 +135,7 @@ class MainActivity : BaseMainActivity() {
     }
 
 
-    fun openSpecificFlavorDesiredFrg(whereToGo: Int) {
+    private fun openSpecificFlavorDesiredFrg(whereToGo: Int) {
         when (whereToGo) {
             CREATE_JOB_FRG -> switchFrgFromActivity(
                 CreateJobFrg(),

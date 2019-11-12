@@ -10,7 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.bitplanet.employment.R
 import com.google.android.material.navigation.NavigationView
 
-open class BaseMainActivity : BaseActivity(),
+open class BaseDrawerActivity : BaseActivity(),
     NavigationView.OnNavigationItemSelectedListener,
     View.OnClickListener {
 
@@ -20,14 +20,14 @@ open class BaseMainActivity : BaseActivity(),
     protected lateinit var mTvLoggedUserEmail: TextView
 
 
-     fun setupViews() {
+    fun setupViews() {
         setupDrawer()
 
         val headerView = mNavigationView.getHeaderView(0)
         mTvLoggedUserEmail = headerView.findViewById(R.id.tv_email)
     }
 
-     fun setupDrawer() {
+    private fun setupDrawer() {
         mToolbar = findViewById(R.id.toolbar)
         setSupportActionBar(mToolbar)
 
@@ -68,5 +68,4 @@ open class BaseMainActivity : BaseActivity(),
             super.onBackPressed()
         }
     }
-
 }

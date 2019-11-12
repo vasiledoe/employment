@@ -6,16 +6,16 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bitplanet.employment.R
-import utils.DataFormatter
 import base.model.PrettyFormattedJob
+import com.bitplanet.employment.R
 import kotlinx.android.synthetic.main.custom_job_item.view.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import utils.DataFormatter
 
 class JobsAdapter(
     private val items: ArrayList<PrettyFormattedJob>,
-    private val clieckedItmListener: (PrettyFormattedJob) -> Unit
+    private val clickedItmListener: (PrettyFormattedJob) -> Unit
 ) : RecyclerView.Adapter<JobsAdapter.ViewHolder>(), KoinComponent {
 
     private val dataFormatter: DataFormatter by inject()
@@ -36,7 +36,7 @@ class JobsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val job = items.get(position)
+        val job = items[position]
 
         holder.tvTitle.text = job.title
         holder.tvField.text = job.field
@@ -45,7 +45,7 @@ class JobsAdapter(
         holder.tvTime.text = job.time
         holder.tvSeen.text = job.seen
 
-        holder.wholeZone.setOnClickListener {clieckedItmListener(job)}
+        holder.wholeZone.setOnClickListener { clickedItmListener(job) }
 
         if (position % 2 == 1) {
             holder.wholeZone.setBackgroundColor(dataFormatter.resUtil.getColorRes(R.color.divider_30))

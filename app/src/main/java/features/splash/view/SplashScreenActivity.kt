@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bitplanet.employment.BuildConfig
-import com.bitplanet.employment.MainActivity
+import base.view.DrawerActivity
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import features.auth.view.AuthActivity
@@ -39,7 +39,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
         mViewModel.isLogged.observe(this, Observer {
             if (it) {
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, DrawerActivity::class.java))
 
             } else {
                 startActivity(Intent(this, AuthActivity::class.java))

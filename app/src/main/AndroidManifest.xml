@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.bitplanet.employment">
-	
+
+	<uses-permission android:name="android.permission.INTERNET" />
+
 	<application
 		android:name="base.model.App"
 		android:allowBackup="true"
@@ -22,7 +24,7 @@
 		</activity>
 		
 		<activity
-			android:name=".MainActivity"
+			android:name="base.view.DrawerActivity"
 			android:configChanges="orientation|keyboardHidden|screenSize|locale"
 			android:label="@string/app_name"
 			android:parentActivityName="features.splash.view.SplashScreenActivity"
@@ -46,6 +48,4 @@
 		android:name="io.fabric.ApiKey"
 		android:value="bfe6496a3eac7b589b70b7b65f123467ae331a32" />
 	
-	<uses-permission android:name="android.permission.INTERNET" />
-
 </manifest>

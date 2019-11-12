@@ -51,7 +51,7 @@ class CreateJobFrg : BaseFrg() {
 
     private fun setupViews(view: View) {
         val btnAddNewJob: Button = view.findViewById(R.id.btn_create_job)
-        btnAddNewJob.setOnClickListener{tryCreateJob()}
+        btnAddNewJob.setOnClickListener { tryCreateJob() }
 
         val cbRemote: CheckBox = view.findViewById(R.id.cb_remote)
         cbRemote.setOnCheckedChangeListener { _, isChecked ->

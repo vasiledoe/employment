@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.frg_details.*
 class DetailsTalentFrg : BaseFrg() {
 
     companion object {
-        private val KEY_TALENT_OBJ_PARCEL = "KEY_TALENT_OBJ_PARCEL"
+        private const val KEY_TALENT_OBJ_PARCEL = "KEY_TALENT_OBJ_PARCEL"
 
         /**
          * Use this factory method to create a new instance of
@@ -91,7 +91,12 @@ class DetailsTalentFrg : BaseFrg() {
 
     private fun loadViews() {
         prettyFormattedTalent?.let {
-            rv_itms.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+            rv_itms.layoutManager = LinearLayoutManager(
+                activity,
+                RecyclerView.VERTICAL,
+                false
+            )
+
             rv_itms.adapter = DetailsItemsAdapter(
                 items = formatter.getTalentDetailItems(it)
             )

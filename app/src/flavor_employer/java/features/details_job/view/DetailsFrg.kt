@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.flavor_employer.frg_job_details.*
 class DetailsFrg : BaseFrg() {
 
     companion object {
-        private val KEY_JOB_OBJ_PARCEL = "KEY_JOB_OBJ_PARCEL"
+        private const val KEY_JOB_OBJ_PARCEL = "KEY_JOB_OBJ_PARCEL"
 
         /**
          * Use this factory method to create a new instance of
@@ -89,7 +89,11 @@ class DetailsFrg : BaseFrg() {
 
     private fun loadViews() {
         prettyFormattedJob?.let {
-            rv_itms.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+            rv_itms.layoutManager = LinearLayoutManager(
+                activity,
+                RecyclerView.VERTICAL,
+                false
+            )
             rv_itms.adapter = DetailsItemsAdapter(
                 items = formatter.getJobDetailItems(it)
             )

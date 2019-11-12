@@ -15,14 +15,14 @@ class CustomDialogs : KoinComponent {
      * make sure to show dialog only if activityCtx not null
      */
     fun showSimpleDialog(
-            activityCtx: Context?,
-            title: String,
-            msg: String,
-            haveCancel: Boolean? = false,
-            customOkTxt: String? = null,
-            customCancelTxt: String? = null,
-            callbackYes: (() -> Unit)? = null,
-            callbackNo: (() -> Unit)? = null
+        activityCtx: Context?,
+        title: String,
+        msg: String,
+        haveCancel: Boolean? = false,
+        customOkTxt: String? = null,
+        customCancelTxt: String? = null,
+        callbackYes: (() -> Unit)? = null,
+        callbackNo: (() -> Unit)? = null
     ) {
         activityCtx?.let {
             val builder = AlertDialog.Builder(it)
@@ -30,14 +30,14 @@ class CustomDialogs : KoinComponent {
             builder.setMessage(msg)
 
             val okTxt = customOkTxt ?: resUtil.getStringRes(android.R.string.yes)
-            builder.setPositiveButton(okTxt) { dialog, id ->
+            builder.setPositiveButton(okTxt) { dialog, _ ->
                 dialog.dismiss()
                 callbackYes?.invoke()
             }
 
             if (haveCancel == true) {
                 val noText = customCancelTxt ?: resUtil.getStringRes(android.R.string.cancel)
-                builder.setNegativeButton(noText) { dialog, id ->
+                builder.setNegativeButton(noText) { dialog, _ ->
                     dialog.dismiss()
                     callbackNo?.invoke()
                 }

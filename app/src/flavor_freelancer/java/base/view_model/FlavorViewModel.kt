@@ -11,7 +11,7 @@ import org.koin.core.inject
 class FlavorViewModel : BaseViewModel() {
 
     val isTalentEditedSuccess = MutableLiveData<Boolean>()
-    val myTalent =  MutableLiveData<Talent>()
+    val myTalent = MutableLiveData<Talent>()
 
     private val editTalentRepo: EditTalentRepo by inject()
     private val detailsJobRepo: DetailsJobRepo by inject()
@@ -43,7 +43,7 @@ class FlavorViewModel : BaseViewModel() {
             return false
         }
 
-        if (!talent.phone.isEmpty()) {
+        if (talent.phone.isNotEmpty()) {
             if (!Patterns.PHONE.matcher(talent.phone).matches()) {
                 error.value = resUtil.getStringRes(R.string.txt_phone_warn)
                 return false
@@ -73,7 +73,7 @@ class FlavorViewModel : BaseViewModel() {
             })
     }
 
-    fun getMyTalent(){
+    fun getMyTalent() {
         isProgressLoading.value = true
 
         editTalentRepo.getMyTalent(
@@ -85,18 +85,18 @@ class FlavorViewModel : BaseViewModel() {
                 isProgressLoading.value = false
                 myTalent.value = null
             },
-            errListener = {err ->
+            errListener = { err ->
                 isProgressLoading.value = false
                 error.value = err ?: getDefErr()
             }
         )
     }
 
-    fun getJobs(fiedId: Int) {
+    fun getJobs(fieldId: Int) {
         isProgressLoading.value = true
 
         listJobsRepo.getJobs(
-            fieldIds = fiedId,
+            fieldIds = fieldId,
             receivedIJobsListener = { receivedJobs ->
                 isProgressLoading.value = false
                 jobs.value = receivedJobs
@@ -111,7 +111,7 @@ class FlavorViewModel : BaseViewModel() {
             })
     }
 
-    fun doIncrementSeenCoounter(docId: String?){
+    fun doIncrementSeenCoounter(docId: String?) {
         detailsJobRepo.incrementSeenCounter(docId)
     }
 }

@@ -15,46 +15,60 @@ class AuthRepo : KoinComponent {
     }
 
 
-    fun createAccount(email: String, password: String, listener: OnAuthListener) {
+    fun createAccount(
+        email: String,
+        password: String,
+        successListener: () -> Unit,
+        errListener: (err: String?) -> Unit
+    ) {
         authInstance.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        logs.LOG("AuthRepo", "createAccount", "success")
-                        listener.onAuthSuccess()
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    logs.LOG("AuthRepo", "createAccount", "success")
+                    successListener()
 
-                    } else {
-                        logs.LOG("AuthRepo", "createAccount", "ERR:" + it.exception)
-                        listener.onErrDb(it.exception.toString())
-                    }
+                } else {
+                    logs.LOG("AuthRepo", "createAccount", "ERR:" + it.exception)
+                    errListener(it.exception.toString())
                 }
+            }
     }
 
-    fun signIn(email: String, password: String, listener: OnAuthListener) {
+    fun signIn(
+        email: String,
+        password: String,
+        successListener: () -> Unit,
+        errListener: (err: String?) -> Unit
+    ) {
         authInstance.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        logs.LOG("AuthRepo", "signIn", "success")
-                        listener.onAuthSuccess()
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    logs.LOG("AuthRepo", "signIn", "success")
+                    successListener()
 
-                    } else {
-                        logs.LOG("AuthRepo", "signIn", "ERR:" + it.exception)
-                        listener.onErrDb(it.exception.toString())
-                    }
+                } else {
+                    logs.LOG("AuthRepo", "signIn", "ERR:" + it.exception)
+                    errListener(it.exception.toString())
                 }
+            }
     }
 
-    fun recoveryPass(email: String, listener: OnRecoveryPassListener) {
+    fun recoveryPass(
+        email: String,
+        successListener: () -> Unit,
+        errListener: (err: String?) -> Unit
+    ) {
         authInstance.sendPasswordResetEmail(email)
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        logs.LOG("AuthRepo", "recoveryPass", "success")
-                        listener.onRecoverySuccess()
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    logs.LOG("AuthRepo", "recoveryPass", "success")
+                    successListener()
 
-                    } else {
-                        logs.LOG("AuthRepo", "recoveryPass", "ERR:" + it.exception)
-                        listener.onErrDb(it.exception.toString())
-                    }
+                } else {
+                    logs.LOG("AuthRepo", "recoveryPass", "ERR:" + it.exception)
+                    errListener(it.exception.toString())
                 }
+            }
     }
 
 }

@@ -41,12 +41,6 @@ open class BaseFrg : Fragment() {
         }
     }
 
-    companion object {
-        val LOADING = 0
-        val NO_ITEMS = 1
-        val HAS_ITEMS = 2
-    }
-
     protected fun openEmail(email: String?) {
         email?.let {
             try {
@@ -67,12 +61,18 @@ open class BaseFrg : Fragment() {
         phone?.let {
             try {
                 val callIntent = Intent(Intent.ACTION_VIEW)
-                callIntent.setData(Uri.parse("tel:" + phone))
+                callIntent.data = Uri.parse("tel:$phone")
                 startActivity(callIntent)
 
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
+    }
+
+    companion object {
+        const val LOADING = 0
+        const val NO_ITEMS = 1
+        const val HAS_ITEMS = 2
     }
 }

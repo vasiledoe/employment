@@ -9,8 +9,6 @@ import com.bitplanet.employment.R
 
 class SettingsFrg : PreferenceFragmentCompat() {
 
-    private lateinit var mViewModel: FlavorViewModel
-
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
@@ -20,7 +18,7 @@ class SettingsFrg : PreferenceFragmentCompat() {
 
     private fun onBindModel() {
         activity?.let {
-            mViewModel = ViewModelProviders.of(it).get(FlavorViewModel::class.java)
+            val mViewModel = ViewModelProviders.of(it).get(FlavorViewModel::class.java)
             mViewModel.setToolbarTitle(resources.getString(R.string.menu_settings))
         }
     }
